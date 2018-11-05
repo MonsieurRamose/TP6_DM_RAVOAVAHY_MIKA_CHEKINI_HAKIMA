@@ -12,7 +12,7 @@
 	const int Moyens::getVitesse() const{
 	return vitesse;
 	}
-	const double Moyens::getempreinte() const{
+	const double Moyens::getEmpreinte() const{
 	return empreinte;
 	}
 	Moyens::~Moyens(){
