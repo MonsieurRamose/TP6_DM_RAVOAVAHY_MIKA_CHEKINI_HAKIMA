@@ -11,9 +11,13 @@ AeroportRegional::AeroportRegional(std::string _nom, double lat, double lng, dou
   std::cout << "Creation de l'aeroport regional: " << this->nom << std::endl;
   this->afficher();
 }
+AeroportRegional::~AeroportRegional()
+  {
+    std::cout << "destruction de l AeroportRegional  " << this->getNom() << std::endl;
+  }
 
 bool AeroportRegional::ajouterLiaison(Terminal* terminal)
-{
+{/*
     bool present = false;
 
     for (std::vector<Terminal*>::iterator liaison = liaisons.begin(); liaison != liaisons.end(); ++liaison)
@@ -25,6 +29,16 @@ bool AeroportRegional::ajouterLiaison(Terminal* terminal)
     }
 
     if(!terminal->estUneGare() && !present && this->getNbLiaisons() < MAX_LIAISON) {
+      this->liaisons.push_back(terminal);
+      terminal->ajouterLiaison(this);
+      std::cout << "Creation d'une liaison entre " << this->nom << " et "  << terminal->getNom() << std::endl;
+      return true;
+    }
+    return false;*/
+
+    bool present = false;
+    if (liaisons.empty())
+    {
       this->liaisons.push_back(terminal);
       terminal->ajouterLiaison(this);
       std::cout << "Creation d'une liaison entre " << this->nom << " et "  << terminal->getNom() << std::endl;

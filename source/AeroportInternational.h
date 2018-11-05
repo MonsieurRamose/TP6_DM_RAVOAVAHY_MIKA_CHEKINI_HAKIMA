@@ -13,6 +13,7 @@ class AeroportInternational: public Terminal
   public:
     AeroportInternational(std::string _nom);
     AeroportInternational(std::string _nom, double lat, double lng, double temps);
+    ~AeroportInternational();
     bool ajouterLiaison(Terminal* terminal);
     bool estUneGare();
     void afficher();

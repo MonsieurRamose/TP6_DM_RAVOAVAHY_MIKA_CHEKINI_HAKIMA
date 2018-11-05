@@ -11,6 +11,10 @@ latitude(lat), longitude(lng), temps_correspondance(temps), nom(_nom)
 {
 }
 
+Terminal::~Terminal()
+{
+    std::cout << "destruction du Terminal " << this->getNom()<< std::endl;
+}
 void Terminal::setLatitude(double lat) {
   this->latitude = lat;
 }
@@ -27,7 +31,7 @@ void Terminal::setNom(std::string _nom) {
   this->nom = _nom;
 }
 
-double Terminal::getLatitude() {
+double Terminal::getLatitude() const{
   return latitude;
 }
 
@@ -46,6 +50,11 @@ int Terminal::getNbLiaisons() {
 std::string Terminal::getNom() {
   return nom;
 }
+
+/*map Terminal::getFlux()
+{
+  return flux;
+}*/
 
 double Terminal::distance(double lat, double lng) {
   return sqrt(pow((lat - this->latitude), 2) + pow((lng - this->longitude), 2));

@@ -1,3 +1,6 @@
+#ifndef MOYENS_H
+#define MOYENS_H
+
 #include <iostream>
 
 class Moyens{
@@ -12,8 +15,8 @@ class Moyens{
 	const int getCapacite() const;
 	const int getVitesse() const;
 	const double getEmpreinte() const;
+	void setEmpreinte(double emp);
 	~Moyens();
 
-
 };
-
+#endif

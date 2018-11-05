@@ -12,6 +12,11 @@ HubAeroport::HubAeroport(std::string _nom, double lat, double lng, double temps)
   this->afficher();
 }
 
+HubAeroport::~HubAeroport()
+{
+  std::cout << "Destruction du HubAeroport" << this->getNom() << std::endl;
+}
+
 bool HubAeroport::ajouterLiaison(Terminal* terminal)
 {
     bool present = false;

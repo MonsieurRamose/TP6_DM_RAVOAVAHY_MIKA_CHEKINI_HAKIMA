@@ -12,6 +12,10 @@ AeroportInternational::AeroportInternational(std::string _nom, double lat, doubl
   this->afficher();
 }
 
+  AeroportInternational::~AeroportInternational()
+  {
+    std::cout << "destruction de l AeroportInternational  " << this->getNom() << std::endl;
+  }
 bool AeroportInternational::ajouterLiaison(Terminal* terminal)
 {
     bool present = false;

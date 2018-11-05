@@ -12,6 +12,11 @@ Gare::Gare(std::string _nom, double lat, double lng, double temps)
   this->afficher();
 }
 
+  Gare::~Gare()
+  {
+    std::cout << "destruction de la gare  " << this->getNom() << std::endl;
+     }
+
 bool Gare::ajouterLiaison(Terminal* terminal)
 {
     bool present = false;
