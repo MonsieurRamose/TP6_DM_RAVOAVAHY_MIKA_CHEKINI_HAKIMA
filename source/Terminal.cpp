@@ -4,13 +4,11 @@
 Terminal::Terminal(std::string _nom):
 nom(_nom)
 {
-  std::cout << "Creation du terminal: " << nom << std::endl;
 }
 
-Terminal::Terminal(std::string _nom, double lat, double lng, double time) :
-latitude(lat), longitude(lng), temps_correspondance(time), nom(_nom)
+Terminal::Terminal(std::string _nom, double lat, double lng, double temps) :
+latitude(lat), longitude(lng), temps_correspondance(temps), nom(_nom)
 {
-  std::cout << "Creation du terminal: " << nom << std::endl;
 }
 
 void Terminal::setLatitude(double lat) {

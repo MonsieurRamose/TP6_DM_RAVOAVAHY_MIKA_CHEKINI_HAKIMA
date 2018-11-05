@@ -1,18 +1,18 @@
-#include "AeroportInternational.h"
+#include "HubAeroport.h"
 
-AeroportInternational::AeroportInternational(std::string _nom): Terminal(_nom)
+HubAeroport::HubAeroport(std::string _nom): Terminal(_nom)
 {
-  std::cout << "Creation de l'aeroport international: " << this->nom << std::endl;
+  std::cout << "Creation du hub aeroport: " << this->nom << std::endl;
 }
 
-AeroportInternational::AeroportInternational(std::string _nom, double lat, double lng, double temps)
+HubAeroport::HubAeroport(std::string _nom, double lat, double lng, double temps)
 : Terminal(_nom, lat, lng, temps)
 {
-  std::cout << "Creation de l'aeroport international: " << this->nom << std::endl;
+  std::cout << "Creation du hub aeroport: " << this->nom << std::endl;
   this->afficher();
 }
 
-bool AeroportInternational::ajouterLiaison(Terminal* terminal)
+bool HubAeroport::ajouterLiaison(Terminal* terminal)
 {
     bool present = false;
 
@@ -34,13 +34,13 @@ bool AeroportInternational::ajouterLiaison(Terminal* terminal)
 }
 
 
-bool AeroportInternational::estUneGare() {
+bool HubAeroport::estUneGare() {
   return false;
 }
 
-void AeroportInternational::afficher() {
+void HubAeroport::afficher() {
   std::cout << std::endl;
-  std::cout << "AeroportInternational de " << this->nom << std::endl;
+  std::cout << "HubAeroport de " << this->nom << std::endl;
   std::cout << "Latitude: " << this->latitude << std::endl;
   std::cout << "Longitude: " << this->longitude << std::endl;
   std::cout << "Temps d'attente: " << this->temps_correspondance << std::endl;

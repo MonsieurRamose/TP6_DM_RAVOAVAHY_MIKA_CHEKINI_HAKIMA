@@ -1,18 +1,18 @@
-#include "AeroportInternational.h"
+#include "HubMultimodal.h"
 
-AeroportInternational::AeroportInternational(std::string _nom): Terminal(_nom)
+HubMultimodal::HubMultimodal(std::string _nom): Terminal(_nom)
 {
-  std::cout << "Creation de l'aeroport international: " << this->nom << std::endl;
+  std::cout << "Creation du hub aeroport: " << this->nom << std::endl;
 }
 
-AeroportInternational::AeroportInternational(std::string _nom, double lat, double lng, double temps)
+HubMultimodal::HubMultimodal(std::string _nom, double lat, double lng, double temps)
 : Terminal(_nom, lat, lng, temps)
 {
-  std::cout << "Creation de l'aeroport international: " << this->nom << std::endl;
+  std::cout << "Creation du hub aeroport: " << this->nom << std::endl;
   this->afficher();
 }
 
-bool AeroportInternational::ajouterLiaison(Terminal* terminal)
+bool HubMultimodal::ajouterLiaison(Terminal* terminal)
 {
     bool present = false;
 
@@ -24,7 +24,7 @@ bool AeroportInternational::ajouterLiaison(Terminal* terminal)
       }
     }
 
-    if(!terminal->estUneGare() && !present && this->getNbLiaisons() < MAX_LIAISON) {
+    if(!present && this->getNbLiaisons() < MAX_LIAISON) {
       this->liaisons.push_back(terminal);
       terminal->ajouterLiaison(this);
       std::cout << "Creation d'une liaison entre " << this->nom << " et "  << terminal->getNom() << std::endl;
@@ -34,13 +34,13 @@ bool AeroportInternational::ajouterLiaison(Terminal* terminal)
 }
 
 
-bool AeroportInternational::estUneGare() {
-  return false;
+bool HubMultimodal::estUneGare() {
+  return true;
 }
 
-void AeroportInternational::afficher() {
+void HubMultimodal::afficher() {
   std::cout << std::endl;
-  std::cout << "AeroportInternational de " << this->nom << std::endl;
+  std::cout << "HubMultimodal de " << this->nom << std::endl;
   std::cout << "Latitude: " << this->latitude << std::endl;
   std::cout << "Longitude: " << this->longitude << std::endl;
   std::cout << "Temps d'attente: " << this->temps_correspondance << std::endl;
