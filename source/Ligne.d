@@ -1,0 +1,1 @@
+Ligne.o: Ligne.cpp
