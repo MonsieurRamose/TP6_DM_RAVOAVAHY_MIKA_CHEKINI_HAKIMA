@@ -10,6 +10,6 @@
 	}
 
  void Train::afficher() const{
-	 std::cout << "Train de " ;
+	 std::cout << "      Train de ";
 	 Moyens::afficher();
  }

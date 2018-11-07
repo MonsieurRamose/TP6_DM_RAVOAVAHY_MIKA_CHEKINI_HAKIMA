@@ -29,7 +29,7 @@ public:
 
 
    void afficher() const{
-   std::cout<< " Ligne "<< typeid(Moyens).name()<< ":"; // permet d'afficher le moyen de transport (Train , Avion, AvionElectrique)
+   std::cout<< "      Ligne "<< typeid(Moyens).name()<< ":"; // permet d'afficher le moyen de transport (Train , Avion, AvionElectrique)
     SuperLigne::afficher();
    }
 /*

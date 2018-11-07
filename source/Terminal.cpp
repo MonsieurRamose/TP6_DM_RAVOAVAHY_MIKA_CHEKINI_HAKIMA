@@ -1,4 +1,5 @@
 #include "Terminal.h"
+#include <string>
 
 
 Terminal::Terminal(std::string _nom):
@@ -55,10 +56,38 @@ std::string Terminal::getNom() {
       return flux;
   }
 
-/*void Terminal::setFlux(Terminal* t, int n){
-  flux
-}*/
+void Terminal::addFlux(Terminal* t, int n){
+  // ajouter un flux
+  try{
+    if(t == NULL)
+    {
+      throw std::string ("Terminal NULL");
+    }else{
+      flux.insert(std::make_pair(t,n));
+    }
+  }
+  catch(std::string const& chaine)
+  {
+     std::cerr << chaine << std::endl;
+  }
+
+}
 
 double Terminal::distance(double lat, double lng) {
   return sqrt(pow((lat - this->latitude), 2) + pow((lng - this->longitude), 2));
+}
+
+void Terminal::afficher(){
+  std::cout << "      Latitude: " << latitude << std::endl;
+  std::cout << "      Longitude: " << longitude << std::endl;
+  std::cout << "      Temps d'attente: " << temps_correspondance << std::endl;
+  std::cout << "      Liaisons: (" << getNbLiaisons() << ")" << std::endl;
+  for (std::vector<Terminal*>::iterator terminal = liaisons.begin(); terminal != liaisons.end(); ++terminal)
+  {
+    std::cout << "      "<<(*terminal)->getNom() << std::endl;
+  }
+  for(std::map<Terminal*, int>::iterator it = flux.begin(); it != flux.end(); it++)
+  {
+    std::cout << "      Passagers à destination de : " << it->first->getNom() << " flux: " << it->second << std::endl;
+  }
 }

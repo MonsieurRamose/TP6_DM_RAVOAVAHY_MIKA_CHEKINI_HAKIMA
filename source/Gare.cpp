@@ -46,12 +46,5 @@ bool Gare::estUneGare() {
 void Gare::afficher() {
   std::cout << std::endl;
   std::cout << "Gare de " << this->nom << std::endl;
-  std::cout << "Latitude: " << this->latitude << std::endl;
-  std::cout << "Longitude: " << this->longitude << std::endl;
-  std::cout << "Temps d'attente: " << this->temps_correspondance << std::endl;
-  std::cout << "Liaisons: (" << this->getNbLiaisons() << ")" << std::endl;
-  for (std::vector<Terminal*>::iterator terminal = liaisons.begin(); terminal != liaisons.end(); ++terminal)
-  {
-    std::cout << (*terminal)->getNom() << std::endl;
-  }
+  Terminal::afficher();
 }

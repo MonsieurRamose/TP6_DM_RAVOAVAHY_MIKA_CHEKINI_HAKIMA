@@ -59,14 +59,8 @@ bool HubMultimodal::estUneGare() {
 void HubMultimodal::afficher() {
   std::cout << std::endl;
   std::cout << "HubMultimodal de " << this->nom << std::endl;
-  std::cout << "Latitude: " << this->latitude << std::endl;
-  std::cout << "Longitude: " << this->longitude << std::endl;
-  std::cout << "Temps d'attente: " << this->temps_correspondance << std::endl;
+  Terminal::afficher();
   if(gare != NULL)
-  std::cout << "gare: " << this->gare->getNom() << std::endl;
-  std::cout << "Liaisons: (" << this->getNbLiaisons() << ")" << std::endl;
-  for (std::vector<Terminal*>::iterator terminal = liaisons.begin(); terminal != liaisons.end(); ++terminal)
-  {
-    std::cout << (*terminal)->getNom() << std::endl;
-  }
+  std::cout << "HubMultimodal: " << this->nom << " a comme gare: "<< this->gare->getNom() << std::endl;
+
 }

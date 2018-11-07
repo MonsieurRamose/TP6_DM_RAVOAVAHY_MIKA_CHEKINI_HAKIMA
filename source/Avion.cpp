@@ -7,3 +7,7 @@
 	Avion::~Avion (){
 		std::cout << "destructeur Avion" << std::endl;
 	}
+	void Avion::afficher() const{
+ 	 std::cout << "      Avion de ";
+ 	 Moyens::afficher();
+  }

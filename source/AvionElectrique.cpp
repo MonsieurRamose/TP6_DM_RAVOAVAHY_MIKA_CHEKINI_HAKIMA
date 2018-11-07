@@ -9,3 +9,8 @@
 	{
 		std::cout << "destructeur AvionElectrique" << std::endl;
 	}
+
+	void AvionElectrique::afficher() const{
+	 std::cout << "      Avion electrique de ";
+	 Moyens::afficher();
+	}

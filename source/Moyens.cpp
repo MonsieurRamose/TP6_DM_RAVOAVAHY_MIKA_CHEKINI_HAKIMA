@@ -25,5 +25,5 @@
 	}
 
 void Moyens::afficher() const{
-		std::cout <<" Vitesse: " << vitesse <<"Empreinte: "<< empreinte<< "capacite: " << capacite << std::endl;
+		std::cout <<" Vitesse: " << vitesse <<" Km/h, Empreinte: "<< empreinte<< " kg/km, capacite: " << capacite <<" passagers" <<std::endl;
 	}

@@ -8,5 +8,6 @@ class AvionElectrique : public Moyens{
 	public:
 	AvionElectrique ();
 	~AvionElectrique ();
+	void afficher() const;
 };
 #endif

@@ -35,9 +35,10 @@ class Terminal
     void setTempsCorrespondance(double temps);
 
     void setNom(std::string _nom);
-    void setFlux(Terminal* t, int n);
+    void addFlux(Terminal* t, int n);
 
     double distance(double lat, double lng);
+    virtual void afficher() ;
 
     virtual bool ajouterLiaison(Terminal* terminal) = 0;
     virtual bool estUneGare() = 0;

@@ -8,5 +8,6 @@ class Avion : public Moyens{
 	public:
 	Avion ();
 	~Avion ();
+	void afficher() const;
 };
 #endif
