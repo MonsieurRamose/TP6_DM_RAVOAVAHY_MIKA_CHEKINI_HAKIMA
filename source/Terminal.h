@@ -16,7 +16,7 @@ class Terminal
     double temps_correspondance;
     std::vector<Terminal*> liaisons; // a revoir selon la classe ligne
     std::string nom;
-  //  std::map<Terminal, int> flux;
+    std::map<Terminal*, int> flux;
   public:
     Terminal();
     Terminal(std::string _nom);
@@ -29,12 +29,13 @@ class Terminal
     double getTempsCorrespondance();
     std::string getNom();
     int getNbLiaisons();
-    //map<Terminal, int>getFlux();
+    const std::map<Terminal*, int>getFlux() const;
     void setLatitude(double lat);
     void setLongitude(double lng);
     void setTempsCorrespondance(double temps);
 
     void setNom(std::string _nom);
+    void setFlux(Terminal* t, int n);
 
     double distance(double lat, double lng);
 

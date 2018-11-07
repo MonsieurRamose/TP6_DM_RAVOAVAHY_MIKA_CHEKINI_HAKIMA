@@ -10,7 +10,7 @@ class Voyage{
 private:
 	Terminal* origine;
 	Terminal* destination;
-	std::list<SuperLigne*> lignes;
+	std::list<SuperLigne*> lignes; // un voyage a une liste de lignes à emprunter
 
 public:
 	Voyage();
@@ -22,6 +22,10 @@ public:
 	void setOrigine(Terminal* o);
 	void setDestination(Terminal* d);
 	void setLignes(SuperLigne * s);
+ 	bool popLignes(SuperLigne * s);
+	void afficherLignes();
+
+
 
 };
 #endif

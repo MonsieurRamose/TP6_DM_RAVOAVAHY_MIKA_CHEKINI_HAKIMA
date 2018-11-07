@@ -51,9 +51,12 @@ std::string Terminal::getNom() {
   return nom;
 }
 
-/*map Terminal::getFlux()
-{
-  return flux;
+  const std::map<Terminal*, int> Terminal::getFlux() const{
+      return flux;
+  }
+
+/*void Terminal::setFlux(Terminal* t, int n){
+  flux
 }*/
 
 double Terminal::distance(double lat, double lng) {

@@ -8,3 +8,8 @@
 	Train::~Train(){
 		std::cout << "destructeur Train" << std::endl;
 	}
+
+ void Train::afficher() const{
+	 std::cout << "Train de " ;
+	 Moyens::afficher();
+ }

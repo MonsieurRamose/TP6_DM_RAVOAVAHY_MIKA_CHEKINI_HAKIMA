@@ -8,5 +8,6 @@ class Train : public Moyens{
 	public:
 	Train();
 	~Train();
+	void afficher() const;
 };
 #endif

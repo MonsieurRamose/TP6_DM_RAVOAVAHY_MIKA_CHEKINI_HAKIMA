@@ -23,3 +23,7 @@
 	{
 		empreinte = emp;
 	}
+
+void Moyens::afficher() const{
+		std::cout <<" Vitesse: " << vitesse <<"Empreinte: "<< empreinte<< "capacite: " << capacite << std::endl;
+	}

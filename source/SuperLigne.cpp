@@ -21,3 +21,7 @@
 	const int SuperLigne::getFrequence() const{
 	return frequence;
 	}
+
+	void SuperLigne::afficher() const{
+		std::cout << " reliant "<< origine->getNom() <<" et " << destination->getNom() <<", frequence: " << frequence<< std::endl;
+	}

@@ -16,6 +16,7 @@ class Moyens{
 	const int getVitesse() const;
 	const double getEmpreinte() const;
 	void setEmpreinte(double emp);
+	virtual void afficher() const;
 	~Moyens();
 
 };

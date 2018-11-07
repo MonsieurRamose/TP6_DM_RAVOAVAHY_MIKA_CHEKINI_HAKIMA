@@ -6,10 +6,13 @@
 #include <list>
 #include <stdexcept>
 #include "Moyens.h"
+#include <typeinfo>
+
+
+
 template <class Moyens>
 class Ligne: public SuperLigne{
-/*private:
-  std::list<Moyens> moyens;*/
+
 public:
   Ligne():SuperLigne(){
 
@@ -22,16 +25,13 @@ public:
   ~Ligne()
   {
     std::cout << "Destructeur Ligne" << std::endl;
-  /*	for(typename std::list<Moyens >::iterator it = moyens.begin(); it != moyens.end(); it++)
-    {
-      if((*it) != NULL)
-      {
-        delete (*it);
-        (*it) = NULL;
-      }
-    }*/
-  //  moyens.clear();
   }
+
+
+   void afficher() const{
+   std::cout<< " Ligne "<< typeid(Moyens).name()<< ":"; // permet d'afficher le moyen de transport (Train , Avion, AvionElectrique)
+    SuperLigne::afficher();
+   }
 /*
   void push(Moyens  m){
   	moyens.push_back(m);

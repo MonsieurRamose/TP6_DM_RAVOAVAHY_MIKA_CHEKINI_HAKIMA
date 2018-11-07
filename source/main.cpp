@@ -6,6 +6,8 @@
 #include"Ligne.h"
 #include"Train.h"
 #include "Avion.h"
+#include "SuperLigne.h"
+#include "Voyage.h"
 
 
 int main()
@@ -24,8 +26,20 @@ int main()
   Moyens *train= new Train();
   //Moyens *avion= new Avion();
   Avion avion= Avion();
-  Ligne<Avion> l (paris, CDG, 400);
-  Ligne<Train> l2(CDG, paris, 400);
+  SuperLigne *l = new Ligne<Avion> (paris, CDG, 400);
+  SuperLigne *ll = new Ligne<Train> ( CDG,paris, 400);
+//  Ligne<Avion> l (paris, CDG, 400);
+  Ligne<Train> l2(CDG, paris, 3300);
+  Voyage v1 (paris, CDG);
+  v1.setLignes(l);
+  v1.setLignes(ll);
+//  v1.afficherLignes();
+  //l2.afficher();
+
+  v1.popLignes(l);
+  v1.afficherLignes();
+
+
 
 
   return 0;
