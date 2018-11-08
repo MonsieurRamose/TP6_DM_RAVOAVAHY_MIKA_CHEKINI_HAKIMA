@@ -21,7 +21,9 @@
 	const int SuperLigne::getFrequence() const{
 	return frequence;
 	}
-
+	void SuperLigne::setFrequence(int freq){
+		frequence = freq;
+	}
 	void SuperLigne::afficher() const{
 		std::cout << " reliant "<< origine->getNom() <<" et " << destination->getNom() <<", frequence: " << frequence<< " passagers/jour"<<std::endl;
 	}

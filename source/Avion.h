@@ -9,5 +9,6 @@ class Avion : public Moyens{
 	Avion ();
 	~Avion ();
 	void afficher() const;
+	const std::string& getName() const;
 };
 #endif

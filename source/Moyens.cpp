@@ -2,8 +2,8 @@
 #include "Moyens.h"
 
 	Moyens:: Moyens():vitesse(0),empreinte ( 0), capacite (0){}
-	Moyens::Moyens(int _vitesse, double _empreinte, int _capacite):
-	vitesse(_vitesse),empreinte ( _empreinte), capacite (_capacite){}
+	Moyens::Moyens(int _vitesse, double _empreinte, int _capacite, std::string _name):
+	vitesse(_vitesse),empreinte ( _empreinte), capacite (_capacite), name(_name){}
 
 
 	const int Moyens::getCapacite() const{
@@ -19,10 +19,10 @@
 	std::cout << "destructeur Moyens" << std::endl;
 	}
 
-	void Moyens::setEmpreinte(double emp)
-	{
-		empreinte = emp;
-	}
+	// void Moyens::setEmpreinte(double emp)
+	// {
+	// 	empreinte = emp;
+	// }
 
 void Moyens::afficher() const{
 		std::cout <<" Vitesse: " << vitesse <<" Km/h, Empreinte: "<< empreinte<< " kg/km, capacite: " << capacite <<" passagers" <<std::endl;

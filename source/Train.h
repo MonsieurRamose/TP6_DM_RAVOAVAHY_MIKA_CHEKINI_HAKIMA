@@ -9,5 +9,6 @@ class Train : public Moyens{
 	Train();
 	~Train();
 	void afficher() const;
+	const std::string& getName() const;    
 };
 #endif

@@ -7,6 +7,7 @@
 #include"Train.h"
 #include "Avion.h"
 #include "SuperLigne.h"
+#include "AvionElectrique.h"
 #include "Voyage.h"
 
 
@@ -27,7 +28,7 @@ int main()
   Moyens *train= new Train();
   //Moyens *avion= new Avion();
   Avion avion= Avion();
-  SuperLigne *l = new Ligne<Avion> (paris, CDG, 400);
+  SuperLigne *l = new Ligne<AvionElectrique> (paris, CDG, 400);
   SuperLigne *ll = new Ligne<Train> ( CDG,paris, 400);
 
 //  Ligne<Avion> l (paris, CDG, 400);

@@ -36,11 +36,11 @@ double Terminal::getLatitude() const{
   return latitude;
 }
 
-double Terminal::getLongitude() {
+double Terminal::getLongitude() const{
   return longitude;
 }
 
-double Terminal::getTempsCorrespondance() {
+double Terminal::getTempsCorrespondance() const{
   return temps_correspondance;
 }
 
@@ -52,7 +52,8 @@ std::string Terminal::getNom() {
   return nom;
 }
 
-  const std::map<Terminal*, int> Terminal::getFlux() const{
+ std::map<Terminal*, int> Terminal::getFlux() const{
+   
       return flux;
   }
 
@@ -63,6 +64,7 @@ void Terminal::addFlux(Terminal* t, int n){
     {
       throw std::string ("Terminal NULL");
     }else{
+      // verifier s'il existe et le mettre a jour
       flux.insert(std::make_pair(t,n));
     }
   }
@@ -73,8 +75,8 @@ void Terminal::addFlux(Terminal* t, int n){
 
 }
 
-double Terminal::distance(double lat, double lng) {
-  return sqrt(pow((lat - this->latitude), 2) + pow((lng - this->longitude), 2));
+double Terminal::distance(double lat, double lng) const{
+  return sqrt(pow((lat - latitude), 2) + pow((lng - longitude), 2));
 }
 
 void Terminal::afficher(){

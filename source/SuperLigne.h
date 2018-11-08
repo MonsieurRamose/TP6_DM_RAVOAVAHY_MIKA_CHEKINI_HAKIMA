@@ -19,6 +19,7 @@ class SuperLigne{
 	const Terminal* getDestination() const;
 	const int getFrequence() const;
 	virtual void afficher() const ;
+	void setFrequence(int freq);
 
 
 };

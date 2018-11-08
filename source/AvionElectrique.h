@@ -9,5 +9,6 @@ class AvionElectrique : public Moyens{
 	AvionElectrique ();
 	~AvionElectrique ();
 	void afficher() const;
+	const std::string& getName() const;
 };
 #endif

@@ -5,6 +5,11 @@
 #include "SuperLigne.h"
 #include <list>
 #include "Terminal.h"
+#include <typeinfo>
+#include "Moyens.h"
+#include "Train.h"
+#include "Avion.h"
+#include "AvionElectrique.h"
 
 class Voyage{
 private:
@@ -24,7 +29,9 @@ public:
 	void setLignes(SuperLigne * s);
  	bool popLignes(SuperLigne * s);
 	void afficherLignes();
-
+	double TempsTrajet() ;
+	double EmpreinteCarbone();
+	Moyens* getMoyen(std::string& m) const;
 
 
 };

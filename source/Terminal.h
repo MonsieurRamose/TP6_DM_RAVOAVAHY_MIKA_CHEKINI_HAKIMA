@@ -25,11 +25,11 @@ class Terminal
 
   public:
     double getLatitude() const;
-    double getLongitude();
-    double getTempsCorrespondance();
+    double getLongitude() const;
+    double getTempsCorrespondance() const;
     std::string getNom();
     int getNbLiaisons();
-    const std::map<Terminal*, int>getFlux() const;
+    std::map<Terminal*, int>getFlux() const;
     void setLatitude(double lat);
     void setLongitude(double lng);
     void setTempsCorrespondance(double temps);
@@ -37,7 +37,7 @@ class Terminal
     void setNom(std::string _nom);
     void addFlux(Terminal* t, int n);
 
-    double distance(double lat, double lng);
+    double distance(double lat, double lng) const;
     virtual void afficher() ;
 
     virtual bool ajouterLiaison(Terminal* terminal) = 0;
