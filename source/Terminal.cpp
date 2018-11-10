@@ -48,12 +48,11 @@ int Terminal::getNbLiaisons() {
   return liaisons.size();
 }
 
-std::string Terminal::getNom() {
+std::string Terminal::getNom() const{
   return nom;
 }
 
  std::map<Terminal*, int> Terminal::getFlux() const{
-   
       return flux;
   }
 
@@ -79,6 +78,17 @@ double Terminal::distance(double lat, double lng) const{
   return sqrt(pow((lat - latitude), 2) + pow((lng - longitude), 2));
 }
 
+int Terminal::getNbFluxPassagers(Terminal *t){
+
+    for(std::map<Terminal* , int>::iterator it = flux.begin(); it != flux.end(); it++)
+    {
+      if(it->first->getNom().compare(t->getNom()) == 0)
+      {
+        return it->second;
+      }
+    }
+    return -1;// si le terminal en paramètre n'est pas une
+}
 void Terminal::afficher(){
   std::cout << "      Latitude: " << latitude << std::endl;
   std::cout << "      Longitude: " << longitude << std::endl;
@@ -92,4 +102,10 @@ void Terminal::afficher(){
   {
     std::cout << "      Passagers à destination de : " << it->first->getNom() << " flux: " << it->second << std::endl;
   }
+}
+
+bool Terminal::operator== (Terminal* t){
+  std::cout << "operator ==" << std::endl;
+  return (this->nom.compare(t->getNom()) == 0) && (this->latitude == t->getLatitude()) &&
+  (this->longitude == t->getLongitude()) && (this->temps_correspondance == t->getTempsCorrespondance());
 }

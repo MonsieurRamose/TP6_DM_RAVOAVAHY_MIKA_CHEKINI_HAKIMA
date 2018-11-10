@@ -27,3 +27,8 @@
 	void SuperLigne::afficher() const{
 		std::cout << " reliant "<< origine->getNom() <<" et " << destination->getNom() <<", frequence: " << frequence<< " passagers/jour"<<std::endl;
 	}
+
+
+	bool SuperLigne::operator== (SuperLigne* s){
+	return (this->origine == s->getOrigine()) && (this->destination == s->getDestination()) && (this->frequence == s->getFrequence());
+  }

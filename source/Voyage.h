@@ -29,7 +29,8 @@ public:
 	void setLignes(SuperLigne * s);
  	bool popLignes(SuperLigne * s);
 	void afficherLignes();
-	double TempsTrajet() ;
+	std::list<SuperLigne*> sortLignes(Terminal* t);
+	double tempsTrajet() ;
 	double EmpreinteCarbone();
 	Moyens* getMoyen(std::string& m) const;
 

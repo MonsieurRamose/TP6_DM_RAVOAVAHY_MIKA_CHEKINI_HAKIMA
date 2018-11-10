@@ -27,7 +27,7 @@ class Terminal
     double getLatitude() const;
     double getLongitude() const;
     double getTempsCorrespondance() const;
-    std::string getNom();
+    std::string getNom() const;
     int getNbLiaisons();
     std::map<Terminal*, int>getFlux() const;
     void setLatitude(double lat);
@@ -36,12 +36,16 @@ class Terminal
 
     void setNom(std::string _nom);
     void addFlux(Terminal* t, int n);
+    int getNbFluxPassagers(Terminal *t);
 
     double distance(double lat, double lng) const;
     virtual void afficher() ;
 
     virtual bool ajouterLiaison(Terminal* terminal) = 0;
     virtual bool estUneGare() = 0;
+
+    bool operator== (Terminal* t);
+
 };
 
 #endif

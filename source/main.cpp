@@ -28,17 +28,19 @@ int main()
   Moyens *train= new Train();
   //Moyens *avion= new Avion();
   Avion avion= Avion();
-  SuperLigne *l = new Ligne<AvionElectrique> (paris, CDG, 400);
-  SuperLigne *ll = new Ligne<Train> ( CDG,paris, 400);
+  SuperLigne *ll = new Ligne<AvionElectrique> (paris, lyon, 400);
+  SuperLigne *l = new Ligne<Train> ( lyon,CDG, 400);
 
 //  Ligne<Avion> l (paris, CDG, 400);
   Ligne<Train> l2(CDG, paris, 3300);
   Voyage v1 (paris, CDG);
-  v1.setLignes(l);
   v1.setLignes(ll);
-  v1.afficherLignes();
-  l2.afficher();
-  train->afficher();
+  v1.setLignes(l);
+  double tempstrajet = v1.tempsTrajet();
+  std::cout << "le temps de trajet est; " << tempstrajet << std::endl;
+  //v1.afficherLignes();
+  //l2.afficher();
+  //train->afficher();
 
   //v1.popLignes(l);
   //v1.afficherLignes();

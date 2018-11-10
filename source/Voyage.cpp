@@ -88,77 +88,80 @@ void Voyage::afficherLignes(){
     }
 }
 }
-double Voyage::TempsTrajet() {
+
+std::list<SuperLigne*> Voyage::sortLignes(Terminal* t){
+
+  std::list<SuperLigne*> lignescopie;
+  /*Copier les lignes dans une liste a part pour ne pas modifier une lignes donnée*/
+  for(std::list<SuperLigne *>::iterator itera = lignes.begin(); itera != lignes.end(); itera++)
+  {
+    lignescopie.push_back(*itera);
+  }
+  /*Cette liste recevera les lignes triées selon l'odre de depart*/
+  std::list<SuperLigne*> lignesTrie;
+  std::list<SuperLigne*> ::iterator itTrie = lignesTrie.begin();
+  const Terminal* org = t;
+
+  std::list<SuperLigne*> ::iterator it = lignescopie.begin();
+
+  /*Lidée est d'inserer dans la liste ligneTrie, les lignes en suivant l ordre de depart pour arriver a la distination finale,
+  tant que la liste de lignes lignescopie n'est pas vide. et a chaque insertion d'une ligne, on enlève cette dernière de
+  la liste lignescopie*/
+
+  while( !lignescopie.empty())
+  {
+    if(it == lignescopie.end())
+    {
+      it = lignescopie.begin();
+    }
+    if((*it)->getOrigine() == org)
+    {
+      lignesTrie.push_back (*it);
+      itTrie ++;
+      org = (*it)->getDestination();
+      /*supprimer la ligne de la liste lignescopie*/
+      lignescopie.remove(*it);
+      it--;
+    }else{
+      it++;
+    }
+  }
+
+  if(org != this->destination)
+  {
+    std::cout<< "Il n ya pas de ligne qui ramène à " << this->destination->getNom()<< std::endl;
+    return lignescopie; // renvoyer une liste vide
+  }
+  return lignesTrie;
+
+}
+double Voyage::tempsTrajet() {
   double dis = 0;
   double temps = 0;
   Moyens *moyenTrans;
   std::string moyenName ;
   std::string m ;
-  for(std::list<SuperLigne *>::iterator it = lignes.begin(); it != lignes.end(); it++)
+  std::list<SuperLigne *>ligneTrie = sortLignes(this->origine);
+  if(ligneTrie.empty())
   {
-    dis = 0;
-    /*Calculer la distance entre les deux villes reliées par une ligne*/
-    dis += (*it)->getOrigine()->distance(((*it)->getDestination())->getLatitude(), ((*it)->getDestination())->getLongitude());
-    /*additionner tous les temps moyen de correspondance des terminaux d'origine*/
-    temps += (*it)->getOrigine()->getTempsCorrespondance();
-
-    /* On doit savoir le moyen de transport emprunté entre deux villes données car la vitesse
-     varie d'un moyende transport à un autre*/
-       m= typeid(lignes).name();
-       moyenTrans = getMoyen( m);
-    /*calculer le temps du trajet en fonction de la vitesse du moyen de transport emprunté*/
-    temps += (dis/moyenTrans->getVitesse()); /* le temps de correspondance sera rajouté au temps entre deux villes*/
-  }
-  return temps;
-}
-
-
-double Voyage::EmpreinteCarbone(){
-  Moyens *moyenTrans;
-  double empreinteCar = 0;
-  double dis = 0;
-  std::string moyenName ;
-  std::string m ;
-  for(std::list<SuperLigne *>::iterator it = lignes.begin(); it != lignes.end(); it++)
-  {
-    dis = 0;
-    /*Calculer la distance entre les deux villes de chaque ligne*/
-    dis += (*it)->getOrigine()->distance(((*it)->getDestination())->getLatitude(), ((*it)->getDestination())->getLongitude());
-    /*calculer l'empreinte carbone qui correspond au flux de chaque ville reliée par chaque ligne*/
-    m= typeid(lignes).name();
-    moyenTrans = getMoyen( m);
-    /*Si le flux de passagers depasse la capacite max du moyen de transport,celui ci ne prends que la quantité de Passagers
-    qui lui permettra de ne pas depasser sa capacite */
-    if((*it)->getFrequence() < moyenTrans->getCapacite())
+    return -1;
+  }else{
+    for(std::list<SuperLigne *>::iterator it = ligneTrie.begin(); it != ligneTrie.end(); it++)
     {
-      // verifier s'il y a de la place
-      int placeRestante =  moyenTrans->getCapacite() - (*it)->getFrequence();
-      std::map<Terminal*, int>::iterator fx = (*it)->getOrigine()->getFlux();
-      if(fx->second < placeRestante)
-      {
-        // embarquer tous les passagers s'il reste encore de la place
-        (*it)->setFrequence(fx->second);
-      }else{
-        //dans le cas ou il ne reste pas de place pour transporter tous les Passagers
-        // on ne transporte que le necessaire
-        int aTransporter = fx->second - (*it)->getFrequence();
-        (*it)->setFrequence(aTransporter);
-        // mettre à jour le flux du terminal
-        // !!!!!!!!!!! rajouter dans la classe terminal une methode pour mof=difier le flux ou bien directement addFlux
+      dis = 0;
+      /*Calculer la distance entre les deux villes reliées par une ligne*/
+      dis += (*it)->getOrigine()->distance(((*it)->getDestination())->getLatitude(), ((*it)->getDestination())->getLongitude());
+      /*additionner tous les temps moyen de correspondance des terminaux d'origine*/
+      temps += (*it)->getOrigine()->getTempsCorrespondance();
 
-      }
-      // calculer l'empreinte carbone = distance * empreinte du moyen de teransport * nombre de passagers
-        empreinteCar += dis * moyenTrans->getEmpreinte() * (*it)->getFrequence();
-
-    }else{
-      // le moyen de transport est plein
-      empreinteCar += dis * moyenTrans->getEmpreinte() * moyenTrans->getCapacite();
+      /* On doit savoir le moyen de transport emprunté entre deux villes données car la vitesse
+       varie d'un moyende transport à un autre*/
+         m= typeid(*it).name();
+         moyenTrans = getMoyen( m);
+      /*calculer le temps du trajet en fonction de la vitesse du moyen de transport emprunté*/
+      temps += (dis/moyenTrans->getVitesse()); /* le temps de correspondance sera rajouté au temps entre deux villes*/
     }
+  }
 
-
-}
-
-
-
-
+  return temps;
 }
