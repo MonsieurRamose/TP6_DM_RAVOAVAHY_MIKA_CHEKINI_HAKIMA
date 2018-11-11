@@ -10,7 +10,7 @@
 #include "Train.h"
 #include "Avion.h"
 #include "AvionElectrique.h"
-
+#include <algorithm>
 class Voyage{
 private:
 	Terminal* origine;
@@ -29,9 +29,9 @@ public:
 	void setLignes(SuperLigne * s);
  	bool popLignes(SuperLigne * s);
 	void afficherLignes();
-	std::list<SuperLigne*> sortLignes(Terminal* t);
+	std::list<SuperLigne*> sortLignes();
 	double tempsTrajet() ;
-	double EmpreinteCarbone();
+	double empreinteCarbone();
 	Moyens* getMoyen(std::string& m) const;
 
 

@@ -48,13 +48,15 @@ int Terminal::getNbLiaisons() {
   return liaisons.size();
 }
 
-std::string Terminal::getNom() const{
+std::string Terminal::getNom() {
   return nom;
 }
 
  std::map<Terminal*, int> Terminal::getFlux() const{
       return flux;
   }
+
+
 
 void Terminal::addFlux(Terminal* t, int n){
   // ajouter un flux
@@ -64,7 +66,27 @@ void Terminal::addFlux(Terminal* t, int n){
       throw std::string ("Terminal NULL");
     }else{
       // verifier s'il existe et le mettre a jour
-      flux.insert(std::make_pair(t,n));
+      auto it = flux.find(t);
+      // si le terminal existe deja, on met a jour le flux
+      if (it != flux.end())
+       {
+         it->second = n;
+       }else{
+         flux.insert(std::make_pair(t,n));
+       }
+
+      /* for( std::map<Terminal*, int>::iterator it = flux.begin();it != flux.end(); it++)
+       {
+         if(it->first == t)
+         {
+           flux.erase(it);
+
+         }
+       }
+         flux.insert(std::make_pair(t,n));
+
+    */
+
     }
   }
   catch(std::string const& chaine)
@@ -78,7 +100,7 @@ double Terminal::distance(double lat, double lng) const{
   return sqrt(pow((lat - latitude), 2) + pow((lng - longitude), 2));
 }
 
-int Terminal::getNbFluxPassagers(Terminal *t){
+int Terminal::getNbFluxPassagers( Terminal *t) {
 
     for(std::map<Terminal* , int>::iterator it = flux.begin(); it != flux.end(); it++)
     {
@@ -87,7 +109,7 @@ int Terminal::getNbFluxPassagers(Terminal *t){
         return it->second;
       }
     }
-    return -1;// si le terminal en paramètre n'est pas une
+    return 0;// si le terminal en paramètre n'est pas une destination finale des passagers;
 }
 void Terminal::afficher(){
   std::cout << "      Latitude: " << latitude << std::endl;
@@ -109,3 +131,7 @@ bool Terminal::operator== (Terminal* t){
   return (this->nom.compare(t->getNom()) == 0) && (this->latitude == t->getLatitude()) &&
   (this->longitude == t->getLongitude()) && (this->temps_correspondance == t->getTempsCorrespondance());
 }
+
+  bool Terminal::operator< (Terminal* t2 )const {
+    return this->nom < t2->getNom();
+  }

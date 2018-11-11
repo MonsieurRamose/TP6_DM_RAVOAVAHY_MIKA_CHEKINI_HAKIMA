@@ -10,7 +10,7 @@ class Gare: public Terminal
     Gare(std::string _nom);
     Gare(std::string _nom, double lat, double lng, double temps);
     ~Gare();
-    bool ajouterLiaison(Terminal* terminal);
+    int ajouterLiaison(Terminal* terminal);
     bool estUneGare();
     void afficher();
 };

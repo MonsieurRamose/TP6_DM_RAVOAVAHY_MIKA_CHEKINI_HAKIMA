@@ -1,12 +1,12 @@
 #include "AeroportRegional.h"
 
-AeroportRegional::AeroportRegional(std::string _nom): Terminal(_nom)
+AeroportRegional::AeroportRegional(std::string _nom): Terminal(_nom), MAX_LIAISON(1)
 {
   std::cout << "Creation de l'aeroport regional: " << this->nom << std::endl;
 }
 
 AeroportRegional::AeroportRegional(std::string _nom, double lat, double lng, double temps)
-: Terminal(_nom, lat, lng, temps)
+: Terminal(_nom, lat, lng, temps), MAX_LIAISON(1)
 {
   std::cout << "Creation de l'aeroport regional: " << this->nom << std::endl;
   this->afficher();
@@ -16,35 +16,22 @@ AeroportRegional::~AeroportRegional()
     std::cout << "destruction de l AeroportRegional  " << this->getNom() << std::endl;
   }
 
-bool AeroportRegional::ajouterLiaison(Terminal* terminal)
-{/*
-    bool present = false;
-
-    for (std::vector<Terminal*>::iterator liaison = liaisons.begin(); liaison != liaisons.end(); ++liaison)
+int AeroportRegional::ajouterLiaison(Terminal* terminal)
+{
+    if (!terminal->estUneGare())
     {
-      if((*liaison)->getNom() == terminal->getNom())
+      if(liaisons.empty())
       {
-        present = true;
+          this->liaisons.push_back(terminal);
+          terminal->ajouterLiaison(this);
+          return 0; // liaison ajoutée
+      }else{
+        return -2; // Un areoport régional est relié qu'avec un seul autre aeroport
       }
+    }else{
+      return -3; //un aeroport régional n est relié qu avec des aeroports
     }
 
-    if(!terminal->estUneGare() && !present && this->getNbLiaisons() < MAX_LIAISON) {
-      this->liaisons.push_back(terminal);
-      terminal->ajouterLiaison(this);
-      std::cout << "Creation d'une liaison entre " << this->nom << " et "  << terminal->getNom() << std::endl;
-      return true;
-    }
-    return false;*/
-
-    bool present = false;
-    if (liaisons.empty())
-    {
-      this->liaisons.push_back(terminal);
-      terminal->ajouterLiaison(this);
-      std::cout << "Creation d'une liaison entre " << this->nom << " et "  << terminal->getNom() << std::endl;
-      return true;
-    }
-    return false;
 }
 
 

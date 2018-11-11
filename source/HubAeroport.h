@@ -8,13 +8,13 @@
 class HubAeroport: public Terminal
 {
   private:
-    const int MAX_LIAISON = 12;
+    const int MAX_LIAISON;
 
   public:
     HubAeroport(std::string _nom);
     HubAeroport(std::string _nom, double lat, double lng, double temps);
     ~HubAeroport();
-    bool ajouterLiaison(Terminal* terminal);
+    int ajouterLiaison(Terminal* terminal);
     bool estUneGare();
     void afficher();
 };

@@ -17,7 +17,7 @@ Gare::Gare(std::string _nom, double lat, double lng, double temps)
     std::cout << "destruction de la gare  " << this->getNom() << std::endl;
      }
 
-bool Gare::ajouterLiaison(Terminal* terminal)
+int Gare::ajouterLiaison(Terminal* terminal)
 {
     bool present = false;
 
@@ -28,14 +28,22 @@ bool Gare::ajouterLiaison(Terminal* terminal)
         present = true;
       }
     }
+    /*une gare permet de circuler que des train;
+    vérifier que le terminal qu'on veut ajouter est une gare et qu'il n'est pas lié à la gare*/
 
-    if(terminal->estUneGare() && !present) {
-      this->liaisons.push_back(terminal);
-      terminal->ajouterLiaison(this);
-      std::cout << "Creation d'une liaison entre " << this->nom << " et "  << terminal->getNom() << std::endl;
-      return true;
+    if(terminal->estUneGare())
+    {
+      if(!present)
+      {
+        this->liaisons.push_back(terminal);
+        terminal->ajouterLiaison(this);
+        return 0; // ajout d une liaison avec le terminal donné en paramètre
+      }else{
+        return -1; // la gare esr déjà liée a au terminal passé en paramètre
+      }
+    }else{
+      return -3; // une gare n est liée qu'avec des gares
     }
-    return false;
 }
 
 

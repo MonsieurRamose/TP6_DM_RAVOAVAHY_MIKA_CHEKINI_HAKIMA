@@ -5,6 +5,8 @@
 #include <vector>
 #include <iostream>
 #include <map>
+#include <iterator>
+#include <algorithm>
 
 #include <cmath>
 
@@ -27,7 +29,7 @@ class Terminal
     double getLatitude() const;
     double getLongitude() const;
     double getTempsCorrespondance() const;
-    std::string getNom() const;
+    std::string getNom() ;
     int getNbLiaisons();
     std::map<Terminal*, int>getFlux() const;
     void setLatitude(double lat);
@@ -35,16 +37,18 @@ class Terminal
     void setTempsCorrespondance(double temps);
 
     void setNom(std::string _nom);
-    void addFlux(Terminal* t, int n);
-    int getNbFluxPassagers(Terminal *t);
+    void addFlux( Terminal* t, int n);
+    int getNbFluxPassagers( Terminal *t) ;
 
     double distance(double lat, double lng) const;
     virtual void afficher() ;
 
-    virtual bool ajouterLiaison(Terminal* terminal) = 0;
+    virtual int ajouterLiaison(Terminal* terminal) = 0;
     virtual bool estUneGare() = 0;
 
     bool operator== (Terminal* t);
+    int& operator[](Terminal* t);
+    bool operator<( Terminal* t) const;
 
 };
 

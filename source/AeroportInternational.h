@@ -8,13 +8,13 @@
 class AeroportInternational: public Terminal
 {
   private:
-    const int MAX_LIAISON = 4;
+    const int MAX_LIAISON;
 
   public:
     AeroportInternational(std::string _nom);
     AeroportInternational(std::string _nom, double lat, double lng, double temps);
     ~AeroportInternational();
-    bool ajouterLiaison(Terminal* terminal);
+    int ajouterLiaison(Terminal* terminal);
     bool estUneGare();
     void afficher();
 };

@@ -4,17 +4,41 @@
 
 	SuperLigne::SuperLigne(){}
 	SuperLigne::SuperLigne(Terminal* orig, Terminal* dest, int freq)
-	:  origine(orig), destination(dest),frequence(freq){}
+	:  origine(orig), destination(dest),frequence(freq){
+		int ajout = origine->ajouterLiaison(destination);
+		switch (ajout)
+		{
+			case 0:
+				std::cout << "Creation d'une liaison entre " << origine->getNom() << " et "  << destination->getNom() << std::endl;
+			case -1:
+				std::cout<< " Le terminal: " << origine->getNom() << " est deja relié à " << destination->getNom() << std::endl;
+			break;
+			case -2:
+				std::cout<< " Le terminal: " << origine->getNom() << " a atteint sa capacité maximum de liaison " << std::endl;
+			break;
+			case -3:
+				std::cout<<" Le terminal " << origine->getNom() << " n'est relié qu'avec des gares "<< std::endl;
+			break;
+			case -4:
+				std::cout<<" Le terminal: " << origine->getNom() << " n'est relié qu'avec une seule gare"<< std::endl;
+			break;
+			default:
+			// ajout == -5
+			std::cout<<" Le terminal " << origine->getNom() << " n'est relié qu'avec des aeroports "<< std::endl;
+			break;
+		}
+
+	}
 
 	SuperLigne::~SuperLigne()
 	{
 		std::cout << "destructeur SuperLigne" << std::endl;
 	}
-	const Terminal* SuperLigne::getOrigine() const{
+	 Terminal* SuperLigne::getOrigine() {
 	return origine;
 	}
 
-	const Terminal* SuperLigne::getDestination() const{
+	 Terminal* SuperLigne::getDestination() {
 	return destination;
 	}
 

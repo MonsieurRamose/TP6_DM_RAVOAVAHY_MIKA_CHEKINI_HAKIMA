@@ -7,13 +7,13 @@
 class AeroportRegional: public Terminal
 {
   private:
-      const int MAX_LIAISON = 1;
+      const int MAX_LIAISON;
   public:
     AeroportRegional(std::string _nom);
     AeroportRegional(std::string _nom, double lat, double lng, double temps);
     ~AeroportRegional();
 
-    bool ajouterLiaison(Terminal* terminal);
+    int ajouterLiaison(Terminal* terminal);
     bool estUneGare();
     void afficher();
 };

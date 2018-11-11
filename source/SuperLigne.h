@@ -13,10 +13,10 @@ class SuperLigne{
 
 	public:
 	SuperLigne();
-	SuperLigne(Terminal* _origine, Terminal* _destination, int _frequence);
+	SuperLigne(Terminal* _origine, Terminal* _destination, int _frequence = 0);
 	~SuperLigne();
-	const Terminal* getOrigine() const;
-	const Terminal* getDestination() const;
+  Terminal* getOrigine() ;
+  Terminal* getDestination() ;
 	const int getFrequence() const;
 	virtual void afficher() const ;
 	void setFrequence(int freq);

@@ -9,17 +9,17 @@
 class HubMultimodal: public Terminal
 {
   private:
-    const int MAX_LIAISON = 12;
-    Gare* gare;
+    const int MAX_LIAISON;
+    Terminal* gare;
 
   public:
     HubMultimodal(std::string _nom);
     HubMultimodal(std::string _nom, double lat, double lng, double temps);
-    HubMultimodal(std::string _nom, double lat, double lng, double temps, Gare* g);
+    HubMultimodal(std::string _nom, double lat, double lng, double temps, Terminal* g);
     ~HubMultimodal();
-    const Gare* getGare() const;
+    const Terminal* getGare() const;
     void setGare(Gare* g);
-    bool ajouterLiaison(Terminal* terminal);
+    int ajouterLiaison(Terminal* terminal);
     bool estUneGare();
     void afficher();
 };
