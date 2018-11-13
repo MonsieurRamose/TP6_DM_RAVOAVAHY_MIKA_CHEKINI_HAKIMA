@@ -123,7 +123,6 @@ std::list<SuperLigne*> Voyage::sortLignes(){
   std::list<SuperLigne*> ::iterator it = lignescopie.begin();
   while( !lignescopie.empty())
   {
-      std::cout<<"okkkkkkkkkkkkkk" << std::endl;
     if(it == lignescopie.end())
     {
       it = lignescopie.begin();
@@ -149,6 +148,9 @@ std::list<SuperLigne*> Voyage::sortLignes(){
   return lignesTrie;
 
 }
+
+
+
 double Voyage::tempsTrajet() {
   double dis = 0;
   double temps = 0;
@@ -179,8 +181,8 @@ double Voyage::tempsTrajet() {
        varie d'un moyende transport à un autre*/
          m= typeid(*it).name();
          moyenTrans = getMoyen( m);
-      /*calculer le temps du trajet en fonction de la vitesse du moyen de transport emprunté*/
-      temps += (dis/moyenTrans->getVitesse()); /* le temps de correspondance sera rajouté au temps entre deux villes*/
+      /*calculer le temps du trajet en fonction de la vitesse du moyen de transport emprunté en minutes*/
+      temps += (dis/(moyenTrans->getVitesse() * 60)); /* le temps de correspondance sera rajouté au temps entre deux villes*/
     }
   }
 

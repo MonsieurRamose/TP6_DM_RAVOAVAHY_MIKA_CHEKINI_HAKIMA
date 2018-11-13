@@ -16,6 +16,7 @@ class HubAeroport: public Terminal
     ~HubAeroport();
     int ajouterLiaison(Terminal* terminal);
     bool estUneGare();
+    bool estUnHubMultimodal();
     void afficher();
 };
 #endif

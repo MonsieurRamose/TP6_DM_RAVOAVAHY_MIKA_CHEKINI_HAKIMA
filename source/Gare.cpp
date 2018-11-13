@@ -31,7 +31,7 @@ int Gare::ajouterLiaison(Terminal* terminal)
     /*une gare permet de circuler que des train;
     vérifier que le terminal qu'on veut ajouter est une gare et qu'il n'est pas lié à la gare*/
 
-    if(terminal->estUneGare())
+    if(terminal->estUneGare() || terminal->estUnHubMultimodal())
     {
       if(!present)
       {
@@ -42,13 +42,17 @@ int Gare::ajouterLiaison(Terminal* terminal)
         return -1; // la gare esr déjà liée a au terminal passé en paramètre
       }
     }else{
-      return -3; // une gare n est liée qu'avec des gares
+      return -3; // une gare n est liée qu'avec des gares ou des HubMultimodal
     }
 }
 
 
 bool Gare::estUneGare() {
   return true;
+}
+
+bool Gare::estUnHubMultimodal(){
+  return false;
 }
 
 void Gare::afficher() {

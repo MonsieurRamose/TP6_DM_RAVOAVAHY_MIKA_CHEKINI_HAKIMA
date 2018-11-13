@@ -93,6 +93,9 @@ bool HubMultimodal::estUneGare() {
   return false;
 }
 
+bool HubMultimodal::estUnHubMultimodal(){
+  return true;
+}
 void HubMultimodal::afficher() {
   std::cout << std::endl;
   std::cout << "HubMultimodal de " << this->nom << std::endl;

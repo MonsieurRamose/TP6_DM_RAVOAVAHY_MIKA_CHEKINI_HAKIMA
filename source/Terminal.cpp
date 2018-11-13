@@ -15,6 +15,14 @@ latitude(lat), longitude(lng), temps_correspondance(temps), nom(_nom)
 Terminal::~Terminal()
 {
     std::cout << "destruction du Terminal " << this->getNom()<< std::endl;
+    /*if(!liaisons.empty)
+    {
+      for(auto it = liaisons.begin; liaisons.end; it++)
+      {
+        delete (*it);
+      }
+    }
+    liaisons.clear(); */
 }
 void Terminal::setLatitude(double lat) {
   this->latitude = lat;
@@ -48,6 +56,10 @@ int Terminal::getNbLiaisons() {
   return liaisons.size();
 }
 
+std::vector<Terminal*> Terminal::getLiasons() const{
+  return liaisons;
+}
+
 std::string Terminal::getNom() {
   return nom;
 }
@@ -66,26 +78,15 @@ void Terminal::addFlux(Terminal* t, int n){
       throw std::string ("Terminal NULL");
     }else{
       // verifier s'il existe et le mettre a jour
-      auto it = flux.find(t);
+//      auto it = flux.find(t);
       // si le terminal existe deja, on met a jour le flux
-      if (it != flux.end())
-       {
-         it->second = n;
-       }else{
+//      if (it != flux.end())
+//       {
+//         it->second = n;
+//       }else{
          flux.insert(std::make_pair(t,n));
-       }
+//       }
 
-      /* for( std::map<Terminal*, int>::iterator it = flux.begin();it != flux.end(); it++)
-       {
-         if(it->first == t)
-         {
-           flux.erase(it);
-
-         }
-       }
-         flux.insert(std::make_pair(t,n));
-
-    */
 
     }
   }
@@ -96,8 +97,19 @@ void Terminal::addFlux(Terminal* t, int n){
 
 }
 
+double Terminal::degree_to_radian(double d) const
+{
+  return (d * M_PI)/180;
+}
 double Terminal::distance(double lat, double lng) const{
-  return sqrt(pow((lat - latitude), 2) + pow((lng - longitude), 2));
+    const double EARTH_RADIUS = 6371.0;
+    double originLatR = degree_to_radian(this->latitude);
+    double originLngR = degree_to_radian(this->longitude);
+    double destinationLatR = degree_to_radian(lat);
+    double destinationLngR = degree_to_radian(lng);
+    double u = sinf((destinationLatR - originLatR) / 2);
+    double v = sinf((destinationLngR - originLngR) / 2);
+    return 2.0 * EARTH_RADIUS * asinf(sqrtf(u * u + cosf(originLatR) * cosf(destinationLatR) * v * v));
 }
 
 int Terminal::getNbFluxPassagers( Terminal *t) {

@@ -10,6 +10,7 @@
 #include "AvionElectrique.h"
 #include "Voyage.h"
 #include "HubMultimodal.h"
+#include "Tests.h"
 
 
 int main()
@@ -39,14 +40,14 @@ int main()
 
 //  Ligne<Avion> l (paris, CDG, 400);
   Ligne<Train> l2(CDG, paris, 3300);
-/*  Voyage v1 (paris, CDG);
+  Voyage v1 (paris, CDG);
   v1.setLignes(ll);
+  v1.setLignes(l);
   v1.setLignes(lll);
-  //v1.setLignes(ll);
-  double tempstrajet = v1.tempsTrajet();
-  double empreintecar = v1.empreinteCarbone();
-  std::cout << "le temps de trajet est; " << tempstrajet << std::endl;
-  std::cout << "l'empreinte carbone est; " << empreintecar << std::endl;*/
+  //double tempstrajet = v1.tempsTrajet();
+  //double empreintecar = v1.empreinteCarbone();
+  //std::cout << "le temps de trajet est; " << tempstrajet << std::endl;
+  //std::cout << "l'empreinte carbone est; " << empreintecar << std::endl;
   //v1.afficherLignes();
   //l2.afficher();
   //train->afficher();
@@ -57,6 +58,11 @@ int main()
   // CDG->addFlux(paris, 1300);
   // CDG->addFlux(lyon, 1300);
   // CDG->afficher();
+
+Tests t;
+double empreinte ;
+empreinte = t.TestSenario1(345, "Avion");
+std::cout <<"empreinte test1 = " << empreinte << std::endl;
 
 
 

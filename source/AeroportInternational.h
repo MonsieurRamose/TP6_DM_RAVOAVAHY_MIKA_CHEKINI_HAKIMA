@@ -17,5 +17,6 @@ class AeroportInternational: public Terminal
     int ajouterLiaison(Terminal* terminal);
     bool estUneGare();
     void afficher();
+    bool estUnHubMultimodal();
 };
 #endif

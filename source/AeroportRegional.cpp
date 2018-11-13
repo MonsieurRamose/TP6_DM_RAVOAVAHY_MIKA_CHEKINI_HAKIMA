@@ -39,6 +39,10 @@ bool AeroportRegional::estUneGare() {
   return false;
 }
 
+bool AeroportRegional::estUnHubMultimodal(){
+  return false;
+}
+
 void AeroportRegional::afficher() {
   std::cout << std::endl;
   std::cout << "AeroportRegional de " << this->nom << std::endl;

@@ -12,6 +12,7 @@ class Gare: public Terminal
     ~Gare();
     int ajouterLiaison(Terminal* terminal);
     bool estUneGare();
+    bool estUnHubMultimodal();
     void afficher();
 };
 #endif

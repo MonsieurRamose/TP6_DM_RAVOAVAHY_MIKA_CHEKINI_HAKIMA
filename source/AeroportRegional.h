@@ -15,6 +15,7 @@ class AeroportRegional: public Terminal
 
     int ajouterLiaison(Terminal* terminal);
     bool estUneGare();
+    bool estUnHubMultimodal();
     void afficher();
 };
 #endif

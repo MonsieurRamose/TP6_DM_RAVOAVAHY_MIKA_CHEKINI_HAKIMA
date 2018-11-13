@@ -21,6 +21,7 @@ class HubMultimodal: public Terminal
     void setGare(Gare* g);
     int ajouterLiaison(Terminal* terminal);
     bool estUneGare();
+    bool estUnHubMultimodal();
     void afficher();
 };
 #endif

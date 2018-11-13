@@ -17,7 +17,7 @@
 				std::cout<< " Le terminal: " << origine->getNom() << " a atteint sa capacité maximum de liaison " << std::endl;
 			break;
 			case -3:
-				std::cout<<" Le terminal " << origine->getNom() << " n'est relié qu'avec des gares "<< std::endl;
+				std::cout<<" Le terminal " << origine->getNom() << " n'est relié qu'avec des gares ou des hubs multimodal "<< std::endl;
 			break;
 			case -4:
 				std::cout<<" Le terminal: " << origine->getNom() << " n'est relié qu'avec une seule gare"<< std::endl;

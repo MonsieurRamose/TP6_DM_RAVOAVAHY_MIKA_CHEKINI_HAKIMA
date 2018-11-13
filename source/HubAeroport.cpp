@@ -61,6 +61,9 @@ bool HubAeroport::estUneGare() {
   return false;
 }
 
+bool HubAeroport::estUnHubMultimodal(){
+  return false;
+}
 void HubAeroport::afficher() {
   std::cout << std::endl;
   std::cout << "HubAeroport de " << this->nom << std::endl;

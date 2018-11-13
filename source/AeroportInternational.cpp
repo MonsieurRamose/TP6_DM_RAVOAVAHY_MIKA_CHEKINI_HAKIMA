@@ -61,6 +61,9 @@ bool AeroportInternational::estUneGare() {
   return false;
 }
 
+bool AeroportInternational::estUnHubMultimodal(){
+  return false;
+}
 void AeroportInternational::afficher() {
   std::cout << std::endl;
   std::cout << "AeroportInternational de " << this->nom << std::endl;
