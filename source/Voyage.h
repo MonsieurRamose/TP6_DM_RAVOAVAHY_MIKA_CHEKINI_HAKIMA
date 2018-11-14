@@ -21,8 +21,8 @@ public:
 	Voyage();
 	Voyage(Terminal* _origine, Terminal* _destination);
 	~Voyage();
-	const Terminal*  getOrigine()const;
-	const Terminal* getDestination() const;
+  Terminal*  getOrigine()const;
+  Terminal* getDestination() const;
 	const std::list<SuperLigne*> getLignes() const;
 	void setOrigine(Terminal* o);
 	void setDestination(Terminal* d);

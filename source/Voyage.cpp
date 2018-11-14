@@ -24,10 +24,10 @@ Voyage::~Voyage(){
 lignes.clear();
 }
 
-const Terminal*  Voyage::getOrigine()const{
+ Terminal*  Voyage::getOrigine()const{
   return origine;
 }
-const Terminal* Voyage::getDestination() const{
+Terminal* Voyage::getDestination() const{
   return destination;
 }
 const std::list<SuperLigne*> Voyage::getLignes() const{
@@ -255,7 +255,5 @@ double Voyage::empreinteCarbone(){
   }
 
 return empreinteCar;
-
-
 
 }

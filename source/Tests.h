@@ -13,6 +13,8 @@
 #include "Train.h"
 #include "Avion.h"
 #include "AvionElectrique.h"
+# include <vector>
+#include "Voyage.h"
 
 
 class Tests {
@@ -23,7 +25,11 @@ public:
    double getEmpreinte();
    void setEmpreinte(double empreintecar);
   static void FluxVilles(Terminal * paris, Terminal *rome, Terminal *lyon, Terminal *naples, Terminal *bruxelles );
-  double TestSenario1(double maxTemps, std::string moy);
+  Scenario* TousVoyagesPossibles( Terminal* terminaux[],int n, std::string sceario);
+  std::vector<SuperLigne*>  ToutesLignesExistantes( Terminal* terminaux[], int n) ;
+  Voyage* RemplirLignes(Terminal* org,Terminal* dest, std::vector<SuperLigne*> lignesEx);
+  void  AfficherVoyagesScenario(Scenario *s);
+  Scenario* TestSenario1(double maxTemps, std::string moy);
   static double TestSenario2();
   static double TestSenario3();
   static double TestSenario4();

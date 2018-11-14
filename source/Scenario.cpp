@@ -7,6 +7,8 @@ Scenario::Scenario(){
 Scenario::Scenario(std::string _nom):nom(_nom){
 
 }
+
+
 Scenario::~Scenario(){
 
 }

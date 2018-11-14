@@ -78,14 +78,14 @@ void Terminal::addFlux(Terminal* t, int n){
       throw std::string ("Terminal NULL");
     }else{
       // verifier s'il existe et le mettre a jour
-//      auto it = flux.find(t);
+      auto it = flux.find(t);
       // si le terminal existe deja, on met a jour le flux
-//      if (it != flux.end())
-//       {
-//         it->second = n;
-//       }else{
+     if (it != flux.end())
+       {
+        it->second = n;
+       }else{
          flux.insert(std::make_pair(t,n));
-//       }
+      }
 
 
     }

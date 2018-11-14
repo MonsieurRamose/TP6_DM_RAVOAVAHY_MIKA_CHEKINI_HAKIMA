@@ -31,7 +31,7 @@ class Terminal
     double getTempsCorrespondance() const;
     std::string getNom() ;
     int getNbLiaisons();
-    std::vector<Terminal*> getLiasons() const; 
+    std::vector<Terminal*> getLiasons() const;
     std::map<Terminal*, int>getFlux() const;
     void setLatitude(double lat);
     void setLongitude(double lng);
