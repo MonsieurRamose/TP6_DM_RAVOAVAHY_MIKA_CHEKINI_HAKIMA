@@ -25,9 +25,9 @@ public:
    double getEmpreinte();
    void setEmpreinte(double empreintecar);
   static void FluxVilles(Terminal * paris, Terminal *rome, Terminal *lyon, Terminal *naples, Terminal *bruxelles );
-  Scenario* TousVoyagesPossibles( Terminal* terminaux[],int n, std::string sceario);
-  std::vector<SuperLigne*>  ToutesLignesExistantes( Terminal* terminaux[], int n) ;
-  Voyage* RemplirLignes(Terminal* org,Terminal* dest, std::vector<SuperLigne*> lignesEx);
+  void TousVoyagesPossibles(std::list <Voyage*> &voyages,Scenario* s, Terminal* terminaux[],int n, std::string sceario);
+  void ToutesLignesExistantes( std::vector<SuperLigne*>lignes, Terminal* terminaux[], int n) ;
+  void RemplirLignes(Voyage* v , Terminal* org,Terminal* dest, std::vector<SuperLigne*> lignesEx);
   void  AfficherVoyagesScenario(Scenario *s);
   Scenario* TestSenario1(double maxTemps, std::string moy);
   static double TestSenario2();
@@ -35,7 +35,7 @@ public:
   static double TestSenario4();
   static double TestSenario5();
   static double TestSenario6();
-
+  void TestPl();
 
 };
 

@@ -19,7 +19,7 @@ public:
   }
 
   Ligne(Terminal* orig, Terminal* dest, int freq): SuperLigne( orig, dest,freq){
-
+    ;
   }
 
   ~Ligne()
@@ -41,7 +41,7 @@ public:
        moyen = "AvionElectrique";
      }
    }
-   std::cout<< "      Ligne "<< moyen<< ":"; // permet d'afficher le moyen de transport (Train , Avion, AvionElectrique)
+   std::cout<< "Ligne "<< moyen<< ":"; // permet d'afficher le moyen de transport (Train , Avion, AvionElectrique)
     SuperLigne::afficher();
    }
 

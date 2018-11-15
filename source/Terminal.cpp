@@ -1,15 +1,20 @@
 #include "Terminal.h"
 #include <string>
 
+long Terminal::DERNIER_NUMERO = 0; /* initialisation de dernier termianlinstancié à 0 qui s'incrémente à chaque nouvelle instanciation*/
 
 Terminal::Terminal(std::string _nom):
 nom(_nom)
 {
+  DERNIER_NUMERO++;
+ this->numero = DERNIER_NUMERO;
 }
 
 Terminal::Terminal(std::string _nom, double lat, double lng, double temps) :
 latitude(lat), longitude(lng), temps_correspondance(temps), nom(_nom)
 {
+  DERNIER_NUMERO++;
+ this->numero = DERNIER_NUMERO;
 }
 
 Terminal::~Terminal()
@@ -68,6 +73,9 @@ std::string Terminal::getNom() {
       return flux;
   }
 
+long Terminal::getNumero() const {
+  return numero;
+}
 
 
 void Terminal::addFlux(Terminal* t, int n){
@@ -123,7 +131,8 @@ int Terminal::getNbFluxPassagers( Terminal *t) {
     }
     return 0;// si le terminal en paramètre n'est pas une destination finale des passagers;
 }
-void Terminal::afficher(){
+void Terminal::afficher()
+{
   std::cout << "      Latitude: " << latitude << std::endl;
   std::cout << "      Longitude: " << longitude << std::endl;
   std::cout << "      Temps d'attente: " << temps_correspondance << std::endl;

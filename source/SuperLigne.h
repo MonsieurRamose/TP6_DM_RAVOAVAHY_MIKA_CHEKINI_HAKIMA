@@ -20,7 +20,6 @@ class SuperLigne{
 	const int getFrequence() const;
 	virtual void afficher() const ;
 	void setFrequence(int freq);
-
 	bool operator==(SuperLigne* t);
 
 

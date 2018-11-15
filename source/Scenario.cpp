@@ -20,13 +20,19 @@ std::list <Voyage *> Scenario::getVoyages() const{
   return voyages;
 }
 void Scenario::addVoyage(Voyage * v){
+  bool found = false;
   try{
     if(v == NULL)
     {
       throw std::string ("Voyage NULL");
     }else{
-
-         voyages.push_back(v);
+        for(std::list <Voyage*>::iterator it = this->getVoyages().begin(); it != this->getVoyages().end(); it++)
+        {
+          if((*it) == v)
+            found = true;
+        }
+        if(!found)
+          voyages.push_back(v);
     }
   }
   catch(std::string const& chaine)
@@ -34,4 +40,15 @@ void Scenario::addVoyage(Voyage * v){
      std::cerr << chaine << std::endl;
   }
 
+}
+
+/*Affiche tous les voyages d un scenario ainsi que ses lignes */
+void Scenario::afficherVoyages () {
+
+  std::cout <<"Les voyages du "<< this->getNom() << " sont: "<< std::endl;
+
+  for(std::list<Voyage *>::iterator it = this->voyages.begin(); it != voyages.end(); it++)
+  {
+    (*it)->afficherLignes();
+  }
 }

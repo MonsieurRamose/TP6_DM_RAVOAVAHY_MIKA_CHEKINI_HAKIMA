@@ -8,11 +8,9 @@ Voyage::Voyage(){
 Voyage::Voyage(Terminal* _origine, Terminal* _destination)
 :origine(_origine), destination(_destination)
 {
-
 }
 
 Voyage::~Voyage(){
-  std::cout << "destructeur Voyage " << std::endl;
   for(typename std::list<SuperLigne*>::iterator it = lignes.begin(); it != lignes.end(); it++)
 {
   if((*it) != NULL)
@@ -30,7 +28,7 @@ lignes.clear();
 Terminal* Voyage::getDestination() const{
   return destination;
 }
-const std::list<SuperLigne*> Voyage::getLignes() const{
+ std::list<SuperLigne*> Voyage::getLignes() const{
   return lignes;
 }
 
@@ -177,24 +175,33 @@ double Voyage::tempsTrajet() {
       /*additionner tous les temps moyen de correspondance des terminaux d'origine*/
       temps += (*it)->getOrigine()->getTempsCorrespondance();
 
+      /*recuperer le flux de passagers */
+      int nbFlux = (*it)->getOrigine()->getNbFluxPassagers((*it)->getDestination());
+
       /* On doit savoir le moyen de transport emprunté entre deux villes données car la vitesse
-       varie d'un moyende transport à un autre*/
+       varie d'un moyen de transport à un autre*/
          m= typeid(*it).name();
          moyenTrans = getMoyen( m);
+
+      /*mettre a jour la frequence*/
+      double freq = floor(nbFlux / moyenTrans->getCapacite());
+      (*it)->setFrequence(freq);
+
+
       /*calculer le temps du trajet en fonction de la vitesse du moyen de transport emprunté en minutes*/
-      temps += (dis/(moyenTrans->getVitesse() * 60)); /* le temps de correspondance sera rajouté au temps entre deux villes*/
-    }
+       /* le temps de correspondance sera rajouté au temps entre deux villes*/
+      temps += (dis/(moyenTrans->getVitesse() * 60))  * (*it)->getFrequence();
+     }
   }
 
   return temps;
 }
 
-double Voyage::empreinteCarbone(){
-  Moyens *moyenTrans;
+double Voyage::empreinteCarbone() {
+
   double empreinteCar = 0;
   double dis = 0;
-  std::string moyenName ;
-  std::string m ;
+
   std::list<SuperLigne *>ligneTrie = sortLignes();
   if(ligneTrie.empty())
   {
@@ -205,55 +212,136 @@ double Voyage::empreinteCarbone(){
       dis = 0;
       /*Calculer la distance entre les deux villes de chaque ligne*/
       dis += (*it)->getOrigine()->distance(((*it)->getDestination())->getLatitude(), ((*it)->getDestination())->getLongitude());
+
+      /*recuperer le flux de passagers qui sont a l'origine de cette ligne et qui vont aller a la destination de cette ligne*/
+
+      int nbFlux = (*it)->getOrigine()->getNbFluxPassagers((*it)->getDestination());
+
       /*calculer l'empreinte carbone qui correspond au flux de chaque ville reliée par chaque ligne*/
-      m= typeid(*it).name();
+        std::string m = typeid(*it).name();
       /*savoir le moyen de transport (train ou avion ou avion electrique)*/
-      moyenTrans = getMoyen( m);
-      /*Si le flux de passagers depasse la capacite max du moyen de transport,celui ci ne prends que la quantité de Passagers
-      qui lui permettra de ne pas depasser sa capacite */
-      if((*it)->getFrequence() < moyenTrans->getCapacite())
-      {
-        // verifier s'il y a de la place
-        int placeRestante =  moyenTrans->getCapacite() - (*it)->getFrequence();
 
-        /*recuperer le flux de passagers qui sont a l'origine de cette ligne et qui vont aller a la destination de cette ligne*/
+      Moyens *moyenTrans = getMoyen( m);
 
-        int nbFlux = (*it)->getOrigine()->getNbFluxPassagers((*it)->getDestination());
-
-        if(nbFlux < placeRestante)
-        {
-          /*embarquer tous les passagers s'il reste encore de la place
-          et metre a jour la frequence de cette ligne*/
-          int freq = (*it)->getFrequence() + nbFlux;
-          (*it)->setFrequence(freq);
-          /*Mettre à jour le flux , ici, tous les passagers sont embarqués donc il ne reste personne qui attend*/
-          (*it)->getOrigine()->addFlux((*it)->getDestination(), 0);
+      /*mettre a jour la frequence*/
+      double freq = floor(nbFlux / moyenTrans->getCapacite());
+      (*it)->setFrequence(freq);
 
 
-
-        }else{
-          /*dans le cas ou il ne reste pas de place pour transporter tous les Passagers
-           on ne transporte que le necessaire*/
-          int freq = (*it)->getFrequence() + placeRestante;
-          /*Mettre a jour la frequance de cette ligne*/
-          (*it)->setFrequence(freq);
-          /*mettre à jour le flux du terminal*/
-          int passagersRestant = nbFlux - placeRestante;
-          (*it)->getOrigine()->addFlux((*it)->getDestination(), passagersRestant);
-
-        }
-        // calculer l'empreinte carbone = distance * empreinte du moyen de teransport * nombre de passagers
-          empreinteCar += dis * moyenTrans->getEmpreinte() * (*it)->getFrequence();
-
-      }else{
-        // le moyen de transport est plein
-        empreinteCar += dis * moyenTrans->getEmpreinte() * moyenTrans->getCapacite();
-      }
-
-
+      /*calculer l'empreinte carbone = distance * empreinte du moyen de teransport * nombre de passagers * frequence(nombre de
+      trajets par jour en tenant en compte du flux)*/
+      empreinteCar += dis * moyenTrans->getEmpreinte() * nbFlux * (*it)->getFrequence();
   }
-  }
+}
 
 return empreinteCar;
+}
+
+
+bool Voyage::operator== (Voyage* v){
+
+  if((this->origine == v->getOrigine()) && (this->destination == v->getDestination()) )
+  {
+      for(std::list<SuperLigne *>::iterator it = this->lignes.begin(); it != this->lignes.end(); it++)
+      {
+
+        if ((std::find(v->getLignes().begin(), v->getLignes().end(), (*it))) != v->getLignes().end())
+         {
+           return false;
+         }
+      }
+      return true;
+  }
+  return false;
+}
+
+/*
+int Voyage::position(Terminal *t, Terminal* terminaux[])
+{
+  for (int i = 0; i < 5; i++) {
+    if(t == terminaux[i])
+    {
+      return i;
+    }
+  }
+  return -1;
+}
+void Voyage::PlusCourtChemin(std::list<SuperLigne *> chemin, std::string moyen, Terminal* terminaux[], int n, std::list<SuperLigne *> leslignes)
+{
+
+    Terminal* start = this->getOrigine();
+
+    std::queue<std::pair<Terminal*, long> > file;
+    file.push(std::make_pair(start, 1));
+
+    //double n = this->getLignes().size()-1;
+
+    std::vector<bool> visited(n) ;
+    for (int i=0; i < n; i++)
+      {
+        visited.at(i)= false;
+      }
+
+      //std::cout<<" visited size "<< this->getLignes().size()<<std::endl;
+
+    long maxDis = 10000000;
+
+    while (!file.empty())
+    {
+        Terminal* u = file.front().first;
+        long dis = file.front().second;
+        file.pop();
+        visited.at(position(u, terminaux)) = true;
+
+          std::cout << "dejjjjjjjjjjjjon  "<< u->getNom() << " " << position(u, terminaux)<< std::endl;
+        for(std::vector<Terminal*>::iterator it = u->getLiasons().begin(); it != u->getLiasons().end(); it++)
+        {
+          std::cout << "destination " << (*it)->getNom() << std::endl;
+            Terminal* destination = (*it);
+            if (!visited.at(position(destination, terminaux)))
+            {
+
+                if ((*it)->getNom().compare(this->getDestination()->getNom()) == 0)
+                    {
+                      maxDis = std::min(maxDis, dis);
+                      SuperLigne* ligne = existeLigne(start, *it, moyen, leslignes);
+                      if(ligne != NULL)
+                      {
+                        chemin.push_back(ligne);
+                        start = (*it);
+                      }
+
+                    }
+                file.push(std::make_pair(destination, dis + 1));
+            }
+        }
 
 }
+}
+
+ SuperLigne* Voyage::existeLigne(Terminal* start,Terminal* l, std::string moyen, std::list<SuperLigne *> leslignes) {
+
+    for(std::list<SuperLigne *>::iterator it = leslignes.begin(); it != leslignes.end(); it++)
+    {
+     if( (*it)->getOrigine()->getNom().compare(start->getNom()) == 0 && (*it)->getDestination()->getNom().compare(l->getNom()) == 0)
+     {
+       return (*it);
+     }
+      /*{
+        if(moyen.compare("Avion") == 0)
+        {
+          return new Ligne<Avion> (this->origine,l,0 );
+        }else
+          if(moyen.compare("AvionElectrique") == 0)
+          {
+            return new Ligne<AvionElectrique> (this->origine,l,0 );
+          }else{
+            return new Ligne<Train> (this->origine,l,0 );
+          }
+      }*/
+
+/*
+    }
+    return NULL;
+}
+*/

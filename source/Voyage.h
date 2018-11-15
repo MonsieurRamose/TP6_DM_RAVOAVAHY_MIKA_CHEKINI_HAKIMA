@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "SuperLigne.h"
+#include "Ligne.h"
 #include <list>
 #include "Terminal.h"
 #include <typeinfo>
@@ -23,7 +24,7 @@ public:
 	~Voyage();
   Terminal*  getOrigine()const;
   Terminal* getDestination() const;
-	const std::list<SuperLigne*> getLignes() const;
+  std::list<SuperLigne*> getLignes() const;
 	void setOrigine(Terminal* o);
 	void setDestination(Terminal* d);
 	void setLignes(SuperLigne * s);
@@ -33,6 +34,10 @@ public:
 	double tempsTrajet() ;
 	double empreinteCarbone();
 	Moyens* getMoyen(std::string& m) const;
+	void PlusCourtChemin(std::list<SuperLigne *> chemin, std::string moyen, Terminal* terminaux[], int n, std::list<SuperLigne *> leslignes);
+	SuperLigne* existeLigne( Terminal *start,Terminal * l, std::string moyen,std::list<SuperLigne *> leslignes);
+	bool operator== (Voyage* v);
+	int position(Terminal *t, Terminal*[] );
 
 
 };

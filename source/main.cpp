@@ -40,8 +40,8 @@ int main()
 //
 // //  Ligne<Avion> l (paris, CDG, 400);
 //   Ligne<Train> l2(CDG, paris, 3300);
-//   Voyage v1 (paris, CDG);
-//   v1.setLignes(ll);
+//  Voyage v1 (paris, CDG);
+//  v1.setLignes(ll);
 //   v1.setLignes(l);
 //   v1.setLignes(lll);
 
@@ -66,10 +66,48 @@ int main()
 // empreinte = t.TestSenario1(345, "Avion");
 // std::cout <<"empreinte test1 = " << empreinte << std::endl;
 //
-Tests t;
-Scenario * s = t.TestSenario1(345, "Avion");
-t.AfficherVoyagesScenario(s);
 
+
+
+Terminal * paris = new HubAeroport("Paris", 48 , 2, 45);
+Terminal * rome = new AeroportInternational("Rome",41 ,12 ,30 );
+Terminal * lyon= new AeroportRegional("Lyon", 45, 4 , 30);
+Terminal * naples= new AeroportRegional("Naples", 40, 14 ,30 );
+Terminal * bruxelles= new AeroportRegional("Bruxelles", 50, 4, 30);
+
+/*appler la methode FluxVilles qui ajoute le flux des passagers a chaque ville*/
+//FluxVilles(paris, rome, lyon, naples,bruxelles);
+
+/*Ajout des liaisons de chaque ville*/
+paris->ajouterLiaison(rome);
+paris->ajouterLiaison(lyon);
+paris->ajouterLiaison(bruxelles);
+rome->ajouterLiaison(naples);
+
+/*création d'un tablea de tous les terminaux du scenario*/
+  std::vector<SuperLigne*> lesLignes;
+ Terminal* terminaux [5] = { paris, rome, lyon, naples, bruxelles};
+
+
+
+
+
+Tests t;
+Scenario* s = t.TestSenario1(345, "Avion");
+//t.AfficherVoyagesScenario(s);
+//t.TestPlusCourtChemin();
+// std::list <Voyage*> voyages;
+// //t.TousVoyagesPossibles( voyages,s, terminaux, 5, "scenario1");
+
+//t.TestPl();
+
+// std::cout<< voyages.size();
+// for(std::list <Voyage*>::iterator it= voyages.begin(); it != voyages.end(); it++)
+// {
+//   //t.RemplirLignes((*it), (*it)->getOrigine(),(*it)->getDestination(), lesLignes);
+//   //std::cout<< ((*it)->getOrigine())->getNom() << " to " <<((*it)->getDestination())->getNom()<<(*it)->getLignes().size()<<std::endl;
+//
+// }
 
   return 0;
 }

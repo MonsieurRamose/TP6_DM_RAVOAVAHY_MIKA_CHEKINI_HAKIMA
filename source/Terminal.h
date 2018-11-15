@@ -7,11 +7,12 @@
 #include <map>
 #include <iterator>
 #include <algorithm>
-
+#include <queue>
 #include <cmath>
 
 class Terminal
 {
+  static long DERNIER_NUMERO;
   protected:
     double latitude;
     double longitude;
@@ -19,6 +20,7 @@ class Terminal
     std::vector<Terminal*> liaisons; // a revoir selon la classe ligne
     std::string nom;
     std::map<Terminal*, int> flux;
+    long numero;
   public:
     Terminal();
     Terminal(std::string _nom);
@@ -33,6 +35,7 @@ class Terminal
     int getNbLiaisons();
     std::vector<Terminal*> getLiasons() const;
     std::map<Terminal*, int>getFlux() const;
+    long getNumero() const;
     void setLatitude(double lat);
     void setLongitude(double lng);
     void setTempsCorrespondance(double temps);

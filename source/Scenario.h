@@ -20,6 +20,7 @@ public:
   std::string getNom() const;
   std::list <Voyage *> getVoyages() const;
   void addVoyage(Voyage *);
+  void afficherVoyages () ;
 
 
 
