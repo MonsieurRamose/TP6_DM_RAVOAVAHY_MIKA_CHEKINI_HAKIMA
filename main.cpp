@@ -111,6 +111,22 @@ int main() {
         std::cout << "Le test TestGare() a reussie" << std::endl;
         std::cout << std::endl;
     }
+    else {
+        std::cout << std::endl;
+        std::cout << "Le test TestGare() n'a pas reussie" << std::endl;
+        std::cout << std::endl;
+    }
+
+    if (Tests::TestAeroportRegional()) {
+        std::cout << std::endl;
+        std::cout << "Le test TestAeroportRegional() a reussie" << std::endl;
+        std::cout << std::endl;
+    }
+    else {
+        std::cout << std::endl;
+        std::cout << "Le test TestAeroportRegional() n'a pas reussie" << std::endl;
+        std::cout << std::endl;
+    }
 
     
     return 0;

@@ -31,6 +31,7 @@ public:
     // TEST SUR LES TYPES DE TERMINAL
 
     static bool TestGare();
+    static bool TestAeroportRegional();
 
     // FIN TEST TYPE TERMINAL
 
