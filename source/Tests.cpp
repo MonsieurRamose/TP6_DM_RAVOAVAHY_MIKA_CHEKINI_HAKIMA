@@ -109,11 +109,161 @@ bool Tests::TestGare() {
 
 
 /*
- * Un aeroport regional permet de faire 4 lignes d'avions
+ * Un aeroport international permet de faire 4 lignes d'avions
  * Il ne doit donc pas permettre l'ajout d'une ligne de train sur la classe
 */
-bool Tests::TestAeroportRegional() {
+bool Tests::TestAeroportInternational() {
     std::cout << "* DEBUT TEST AEROPORT REGIONAL *" << std::endl;
+    bool ok = true;
+
+    std::cout << std::endl;
+    std::cout << "** TEST CREATION AVEC AFFICHAGE **" << std::endl;
+    std::cout << std::endl;
+
+    Terminal* bruxelles = new AeroportInternational("Bruxelles", 50.51, 4.20);
+
+    std::cout << std::endl;
+    std::cout << "** FIN TEST CREATION AVEC AFFICHAGE **" << std::endl;
+    std::cout << std::endl;
+
+    Terminal* rome = new Gare("Romes");
+    Terminal* naples = new AeroportInternational("Naples");
+
+    int resultat = bruxelles->ajouterLiaison(rome);
+    if(resultat == 1) {
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT ANORMAL" << std::endl;
+        std::cout << "L' aeroport international " << bruxelles->getNom()
+                  << " ne doit pas etre liee a la gare" << rome->getNom() << std::endl;
+        std::cout << std::endl;
+        return false;
+    }
+    else if(resultat == 0)
+    {
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT ANORMAL" << std::endl;
+        std::cout << "L' aeroport international " << bruxelles->getNom()
+                  << " a deja ete liee a la gare" << rome->getNom() << std::endl;
+        std::cout << std::endl;
+        return false;
+    }
+    else if(resultat == -1){
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT NORMAL" << std::endl;
+        std::cout << "L' aeroport international " << bruxelles->getNom()
+                  << " ne peut pas ete liee a la gare" << rome->getNom() << std::endl;
+        std::cout << std::endl;
+    }
+
+    resultat = bruxelles->ajouterLiaison(naples);
+
+
+    if(resultat == 1) {
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT NORMAL" << std::endl;
+        std::cout << "L' aeroport international " << rome->getNom()
+                  << " a ete liee a l'aeroport" << naples->getNom() << std::endl;
+        std::cout << std::endl;
+    }
+    else if(resultat == 0)
+    {
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT ANORMAL" << std::endl;
+        std::cout << "L' aeroport international " << rome->getNom()
+                  << " a deja ete liee a l'aeroport" << naples->getNom() << std::endl;
+        std::cout << std::endl;
+        return false;
+    }
+    else if(resultat == -1){
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT ANORMAL" << std::endl;
+        std::cout << "L' aeroport AeroportInternational " << rome->getNom()
+                  << " ne peut pas ete liee a l'aeroport" << naples->getNom() << std::endl;
+        std::cout << std::endl;
+        ok = true;
+    }
+
+    std::cout << std::endl;
+    std::cout << "** TEST NOMBRES DE LIAISONS **" << std::endl;
+    std::cout << std::endl;
+
+    Terminal* paris = new AeroportInternational("Paris");
+    Terminal* brest = new AeroportRegional("Brest");
+    Terminal* villetaneuse = new HubAeroport("Villetaneuse");
+    Terminal* neily = new AeroportRegional("Neily");
+
+    std::list<Terminal*> listes;
+    listes.push_back(paris);
+    listes.push_back(brest);
+    listes.push_back(villetaneuse);
+
+    // Actuellement bruxelles possede 1 liaisons
+    // Comme un aeroport international peut supporter 4 liaisons il doit
+    // encore pouvoir ajouter 3 aeroport dans sa liaison
+    for (std::list<Terminal *>::iterator it = listes.begin(); it != listes.end(); it++) {
+        resultat = bruxelles->ajouterLiaison((*it));
+        std::cout << "L' aeroport international " << bruxelles->getNom()
+                  << " a ete liee a " << (*it)->getNom() << std::endl;
+        if(resultat != 1)
+            return false;
+    }
+
+    // Maintenant si on ajoute une ligne il ne doit pas permette cet ajout
+    resultat  = bruxelles->ajouterLiaison(neily);
+
+    if(resultat == -1)
+    {
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT NORMAL" << std::endl;
+        std::cout << "L' aeroport international " << bruxelles->getNom()
+                  << " ne peut pas ete liee a " << neily->getNom() << std::endl;
+        std::cout << std::endl;
+    }
+    else if(resultat == 1)
+    {
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT ANORMAL" << std::endl;
+        std::cout << "L' aeroport international " << bruxelles->getNom()
+                  << " ne doit pas etre liee a " << neily->getNom() << std::endl;
+        std::cout << std::endl;
+        return false;
+    }
+
+
+    std::cout << std::endl;
+    std::cout << "** FIN TEST NOMBRE DE LIAISONS  **" << std::endl;
+    std::cout << std::endl;
+
+
+    std::cout << std::endl;
+    std::cout << "** TEST AFFICHAGE LIAISONS **" << std::endl;
+    std::cout << std::endl;
+
+    bruxelles->afficher();
+
+    std::cout << std::endl;
+    std::cout << "** FIN TEST AFFICHAGE LIAISONS  **" << std::endl;
+    std::cout << std::endl;
+
+
+    delete bruxelles;
+    delete rome;
+    delete naples;
+
+
+    delete paris;
+    delete brest;
+
+    std::cout << std::endl;
+    std::cout << "* FIN TEST AEROPORT INTERNATIONAL *" << std::endl;
+    std::cout << std::endl;
+
+    return ok;
+}
+
+bool Tests::TestAeroportRegional()
+{
+std::cout << "* DEBUT TEST AEROPORT REGIONAL *" << std::endl;
     bool ok = true;
 
     std::cout << std::endl;
@@ -127,7 +277,7 @@ bool Tests::TestAeroportRegional() {
     std::cout << std::endl;
 
     Terminal* rome = new Gare("Romes");
-    Terminal* naples = new AeroportRegional("Naples");
+    Terminal* naples = new AeroportInternational("Naples");
 
     int resultat = bruxelles->ajouterLiaison(rome);
     if(resultat == 1) {
@@ -162,26 +312,25 @@ bool Tests::TestAeroportRegional() {
         std::cout << std::endl;
         std::cout << "COMPORTEMENT NORMAL" << std::endl;
         std::cout << "L' aeroport regional " << rome->getNom()
-                  << "a ete liee a l'aeroport regional" << naples->getNom() << std::endl;
+                  << " a ete liee a l'aeroport" << naples->getNom() << std::endl;
         std::cout << std::endl;
-        return false;
     }
     else if(resultat == 0)
     {
         std::cout << std::endl;
         std::cout << "COMPORTEMENT ANORMAL" << std::endl;
         std::cout << "L' aeroport regional " << rome->getNom()
-                  << " a deja ete liee a l'aeroport regional" << naples->getNom() << std::endl;
+                  << " a deja ete liee a l'aeroport" << naples->getNom() << std::endl;
         std::cout << std::endl;
         return false;
     }
     else if(resultat == -1){
         std::cout << std::endl;
         std::cout << "COMPORTEMENT ANORMAL" << std::endl;
-        std::cout << "L' aeroport regional " << rome->getNom()
-                  << " ne peut pas ete liee a l'aeroport regional" << naples->getNom() << std::endl;
+        std::cout << "L' aeroport AeroportInternational " << rome->getNom()
+                  << " ne peut pas ete liee a l'aeroport" << naples->getNom() << std::endl;
         std::cout << std::endl;
-        ok = true;
+        return false;
     }
 
 
@@ -199,48 +348,26 @@ bool Tests::TestAeroportRegional() {
     std::cout << "** TEST NOMBRES DE LIAISONS **" << std::endl;
     std::cout << std::endl;
 
-    Terminal* paris = new AeroportInternational("Paris");
     Terminal* brest = new AeroportRegional("Brest");
-    Terminal* villetaneuse = new HubAeroport("Villetaneuse");
-    Terminal* neily = new AeroportRegional("Neily");
 
-    List<Terminal*> listes;
-    listes.push_back(paris);
-    listes.push_back(brest);
-    listes.push_back(villetaneuse);
 
     // Actuellement bruxelles possede 1 liaisons
-    // Comme un aeroport regional peut supporter 4 liaisons il doit
-    // encore pouvoir ajouter 3 aeroport dans sa liaison
-    for (std::vector<SuperLigne *>::iterator it = listes.begin(); it != listes.end(); it++) {
-        resultat = bruxelles->ajouterLiaison((*it));
-        std::cout << "L' aeroport regional " << bruxelles->getNom()
-                  << "a ete liee a " << (*it)->getNom() << std::endl;
-        if(resultat != 1)
-            return false;
-    }
-
-    // Maintenant si on ajoute une ligne il ne doit pas permette cet ajout
-    resultat  = bruxelles->ajouterLiaison(neily);
-
-    if(resultat == -1)
-    {
-        std::cout << std::endl;
-        std::cout << "COMPORTEMENT NORMAL" << std::endl;
-        std::cout << "L' aeroport regional " << bruxelles->getNom()
-                  << " ne peut pas ete liee a " << neily->getNom() << std::endl;
-        std::cout << std::endl;
-    }
-    else if(resultat == 1)
-    {
+    // Donc on ne doit plus pouvoir inserer d'autre liaison dessus
+    resultat = bruxelles->ajouterLiaison(brest);
+    if(resultat == 1){
         std::cout << std::endl;
         std::cout << "COMPORTEMENT ANORMAL" << std::endl;
-        std::cout << "L' aeroport regional " << bruxelles->getNom()
-                  << " ne doit pas etre liee a " << neily->getNom() << std::endl;
-        std::cout << std::endl;
+        std::cout << "L' aeroport international " << bruxelles->getNom()
+                    << " a ete liee a " << brest->getNom() << std::endl;
         return false;
     }
-
+    else {
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT NORMAL" << std::endl;
+        std::cout << "L' aeroport regional " << rome->getNom()
+                  << "ne peut pas etre liee a l'aeroport" << naples->getNom() << std::endl;
+        std::cout << std::endl;
+    }
 
     std::cout << std::endl;
     std::cout << "** FIN TEST NOMBRE DE LIAISONS  **" << std::endl;
@@ -251,18 +378,14 @@ bool Tests::TestAeroportRegional() {
     delete rome;
     delete naples;
 
-
-    delete paris;
     delete brest;
 
     std::cout << std::endl;
-    std::cout << "* FIN TEST AEROPORT REGIONAL *" << std::endl;
+    std::cout << "* FIN TEST AEROPORT INTERNATIONAL *" << std::endl;
     std::cout << std::endl;
 
     return ok;
 }
-
-
 
 double Tests::getEmpreinte() {
     return empreintecar;
@@ -429,8 +552,35 @@ Scenario *Tests::TestSenario1(double maxTemps, std::string moyenTrans) {
 }
 
 
-static void TestSenario2() {
+static bool TestSenario2() {
+    bool ok = true;
 
+    Terminal* paris = new HubMultimodal("Paris");
+    Terminal* rome = new AeroportInternational("Rome");
+
+    Terminal* bruxelles = new Gare("Bruxelles");
+    Terminal* lyon = new AeroportRegional("Lyon");
+    Terminal* naples = new AeroportRegional("Naples");
+
+    rome->ajouterLiaison(paris);
+    lyon->ajouterLiaison(paris);
+    bruxelles->ajouterLiaison(paris);
+    naples->ajouterLiaison(paris);
+
+    std::list<Terminal*> listes;
+    listes.push_back(paris);
+    listes.push_back(rome);
+    listes.push_back(bruxelles);
+    listes.push_back(lyon);
+    listes.push_back(naples);
+
+    // Les differents lignes que l'on peut avoir sur cette carte
+    
+
+    delete paris;
+    delete rome;
+
+    return ok;
 }
 
 static void TestSenario3() {

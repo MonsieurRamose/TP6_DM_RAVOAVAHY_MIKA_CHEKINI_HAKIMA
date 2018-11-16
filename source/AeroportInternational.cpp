@@ -4,6 +4,12 @@ AeroportInternational::AeroportInternational(std::string _nom) : Terminal(_nom),
     std::cout << "Creation de l'aeroport international: " << this->nom << std::endl;
 }
 
+AeroportInternational::AeroportInternational(std::string _nom, double lat, double lng)
+        : Terminal(_nom, lat, lng, 0), MAX_LIAISON(4) {
+    std::cout << "Creation de l'aeroport international: " << this->nom << std::endl;
+    this->afficher();
+}
+
 AeroportInternational::AeroportInternational(std::string _nom, double lat, double lng, double temps)
         : Terminal(_nom, lat, lng, temps), MAX_LIAISON(4) {
     std::cout << "Creation de l'aeroport international: " << this->nom << std::endl;
@@ -28,24 +34,16 @@ int AeroportInternational::ajouterLiaison(Terminal *terminal) {
             if (this->getNbLiaisons() < MAX_LIAISON) {
                 this->liaisons.push_back(terminal);
                 terminal->ajouterLiaison(this);
-                return 0; // ajout du terminal
+                return 1; // ajout du terminal
             } else {
-                return -2; // complet
+                return -1; // complet
             }
         } else {
-            return -1; // deja present
+            return 0; // deja present
         }
     } else {
-        return -5; //un aeroport international n est relie qu avec des aeroports
+        return -1; //un aeroport international n est relie qu avec des aeroports
     }
-
-    /*  if(!terminal->estUneGare() && !present && this->getNbLiaisons() < MAX_LIAISON) {
-        this->liaisons.push_back(terminal);
-        terminal->ajouterLiaison(this);
-        std::cout << "Creation d'une liaison entre " << this->nom << " et "  << terminal->getNom() << std::endl;
-        return true;
-      }
-      return false;*/
 }
 
 
