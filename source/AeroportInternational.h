@@ -12,6 +12,8 @@ private:
 public:
     AeroportInternational(std::string _nom);
 
+    AeroportInternational(std::string _nom, double lat, double lng);
+
     AeroportInternational(std::string _nom, double lat, double lng, double temps);
 
     ~AeroportInternational();

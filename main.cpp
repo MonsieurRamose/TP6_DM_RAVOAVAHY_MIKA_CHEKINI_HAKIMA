@@ -12,6 +12,19 @@
 #include "source/Voyage.h"
 #include "source/HubMultimodal.h"
 
+void success(std::string functionName)
+{
+    std::cout << std::endl;
+    std::cout << "Le test " << functionName <<" a reussie" << std::endl;
+    std::cout << std::endl;
+}
+
+void failed(std::string functionName)
+{
+    std::cout << std::endl;
+    std::cout << "Le test " << functionName <<" a echoue" << std::endl;
+    std::cout << std::endl;
+}
 
 int main() {
 //   Gare plymonth("Plymonth");
@@ -107,27 +120,32 @@ int main() {
 
 
     if (Tests::TestGare()) {
-        std::cout << std::endl;
-        std::cout << "Le test TestGare() a reussie" << std::endl;
-        std::cout << std::endl;
+        success("TestGare()");
     }
     else {
-        std::cout << std::endl;
-        std::cout << "Le test TestGare() n'a pas reussie" << std::endl;
-        std::cout << std::endl;
+        failed("TestGare()");
     }
 
     if (Tests::TestAeroportRegional()) {
-        std::cout << std::endl;
-        std::cout << "Le test TestAeroportRegional() a reussie" << std::endl;
-        std::cout << std::endl;
+        success("TestAeroportRegional()");
     }
     else {
-        std::cout << std::endl;
-        std::cout << "Le test TestAeroportRegional() n'a pas reussie" << std::endl;
-        std::cout << std::endl;
+        failed("TestAeroportRegional()");
     }
 
-    
+    if (Tests::TestAeroportInternational()) {
+        success("TestAeroportInternational()");
+    }
+    else {
+        failed("TestAeroportInternational()");
+    }
+
+    if (Tests::TestSenario2()) {
+        success("TestSenario2()");
+    }
+    else {
+        failed("TestSenario2()");
+    }
+
     return 0;
 }

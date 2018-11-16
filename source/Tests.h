@@ -31,6 +31,7 @@ public:
     // TEST SUR LES TYPES DE TERMINAL
 
     static bool TestGare();
+    static bool TestAeroportInternational();
     static bool TestAeroportRegional();
 
     // FIN TEST TYPE TERMINAL
@@ -48,7 +49,7 @@ public:
 
     Scenario *TestSenario1(double maxTemps, std::string moy);
 
-    static double TestSenario2();
+    static bool TestSenario2();
 
     static double TestSenario3();
 

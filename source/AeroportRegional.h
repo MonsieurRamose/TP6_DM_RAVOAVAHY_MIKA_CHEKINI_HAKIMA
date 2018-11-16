@@ -10,6 +10,8 @@ private:
 public:
     AeroportRegional(std::string _nom);
 
+    AeroportRegional(std::string _nom, double lat, double lng);
+
     AeroportRegional(std::string _nom, double lat, double lng, double temps);
 
     ~AeroportRegional();
