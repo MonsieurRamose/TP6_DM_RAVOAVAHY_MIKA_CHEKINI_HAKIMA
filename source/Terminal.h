@@ -40,7 +40,7 @@ public:
 
     int getNbLiaisons();
 
-    std::vector<Terminal *> getLiasons() const;
+    std::vector<Terminal *> getLiaisons() const;
 
     std::map<Terminal *, int> getFlux() const;
 

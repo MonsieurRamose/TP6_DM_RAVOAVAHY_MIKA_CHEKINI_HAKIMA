@@ -4,6 +4,12 @@ Gare::Gare(std::string _nom) : Terminal(_nom) {
     std::cout << "Creation de la gare: " << this->nom << std::endl;
 }
 
+Gare::Gare(std::string _nom, double lat, double lng)
+        : Terminal(_nom, lat, lng, 0) {
+    std::cout << "Creation de la gare: " << this->nom << std::endl;
+    this->afficher();
+}
+
 Gare::Gare(std::string _nom, double lat, double lng, double temps)
         : Terminal(_nom, lat, lng, temps) {
     std::cout << "Creation de la gare: " << this->nom << std::endl;
@@ -11,6 +17,10 @@ Gare::Gare(std::string _nom, double lat, double lng, double temps)
 }
 
 Gare::~Gare() {
+    for (std::vector<Terminal *>::iterator liaison = liaisons.begin(); liaison != liaisons.end(); ++liaison) {
+        (*liaison) = NULL;
+    }
+    liaisons.clear();
     std::cout << "destruction de la gare  " << this->getNom() << std::endl;
 }
 
@@ -29,12 +39,12 @@ int Gare::ajouterLiaison(Terminal *terminal) {
         if (!present) {
             this->liaisons.push_back(terminal);
             terminal->ajouterLiaison(this);
-            return 0; // ajout d une liaison avec le terminal donné en paramètre
+            return 1; // ajout d une liaison avec le terminal donné en paramètre
         } else {
-            return -1; // la gare esr déjà liée a au terminal passé en paramètre
+            return 0; // la gare est deja ete liee au terminal passé en paramètre
         }
     } else {
-        return -3; // une gare n est liée qu'avec des gares ou des HubMultimodal
+        return -1; // une gare ne peut etre liée qu'avec des gares ou des HubMultimodal
     }
 }
 

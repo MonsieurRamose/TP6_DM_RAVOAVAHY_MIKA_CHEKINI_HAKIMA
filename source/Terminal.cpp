@@ -1,7 +1,7 @@
 #include "Terminal.h"
 #include <string>
 
-long Terminal::DERNIER_NUMERO = 0; /* initialisation de dernier termianlinstancié à 0 qui s'incrémente à chaque nouvelle instanciation*/
+long Terminal::DERNIER_NUMERO = 0; /* initialisation de dernier terminal instancié à 0 qui s'incrémente à chaque nouvelle instanciation*/
 
 Terminal::Terminal(std::string _nom) :
         nom(_nom) {
@@ -17,14 +17,7 @@ Terminal::Terminal(std::string _nom, double lat, double lng, double temps) :
 
 Terminal::~Terminal() {
     std::cout << "destruction du Terminal " << this->getNom() << std::endl;
-    /*if(!liaisons.empty)
-    {
-      for(auto it = liaisons.begin; liaisons.end; it++)
-      {
-        delete (*it);
-      }
-    }
-    liaisons.clear(); */
+    liaisons.clear();
 }
 
 void Terminal::setLatitude(double lat) {
@@ -59,7 +52,7 @@ int Terminal::getNbLiaisons() {
     return liaisons.size();
 }
 
-std::vector<Terminal *> Terminal::getLiasons() const {
+std::vector<Terminal *> Terminal::getLiaisons() const {
     return liaisons;
 }
 

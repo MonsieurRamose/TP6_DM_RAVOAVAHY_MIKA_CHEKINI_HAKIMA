@@ -1,4 +1,5 @@
 #include <iostream>
+#include "source/Tests.h"
 #include "source/Gare.h"
 #include"source/Terminal.h"
 #include "source/AeroportRegional.h"
@@ -10,7 +11,6 @@
 #include "source/AvionElectrique.h"
 #include "source/Voyage.h"
 #include "source/HubMultimodal.h"
-#include "source/Tests.h"
 
 
 int main() {
@@ -45,20 +45,20 @@ int main() {
 //   v1.setLignes(lll);
 
 
-    //double tempstrajet = v1.tempsTrajet();
-    //double empreintecar = v1.empreinteCarbone();
-    //std::cout << "le temps de trajet est; " << tempstrajet << std::endl;
-    //std::cout << "l'empreinte carbone est; " << empreintecar << std::endl;
-    //v1.afficherLignes();
-    //l2.afficher();
-    //train->afficher();
+//double tempstrajet = v1.tempsTrajet();
+//double empreintecar = v1.empreinteCarbone();
+//std::cout << "le temps de trajet est; " << tempstrajet << std::endl;
+//std::cout << "l'empreinte carbone est; " << empreintecar << std::endl;
+//v1.afficherLignes();
+//l2.afficher();
+//train->afficher();
 
-    //v1.popLignes(l);
-    //v1.afficherLignes();
+//v1.popLignes(l);
+//v1.afficherLignes();
 
-    // CDG->addFlux(paris, 1300);
-    // CDG->addFlux(lyon, 1300);
-    // CDG->afficher();
+// CDG->addFlux(paris, 1300);
+// CDG->addFlux(lyon, 1300);
+// CDG->afficher();
 
 // Tests t;
 // double empreinte ;
@@ -68,28 +68,28 @@ int main() {
 
 
 
-    Terminal *paris = new HubAeroport("Paris", 48, 2, 45);
+    /* Terminal *paris = new HubAeroport("Paris", 48, 2, 45);
     Terminal *rome = new AeroportInternational("Rome", 41, 12, 30);
     Terminal *lyon = new AeroportRegional("Lyon", 45, 4, 30);
     Terminal *naples = new AeroportRegional("Naples", 40, 14, 30);
-    Terminal *bruxelles = new AeroportRegional("Bruxelles", 50, 4, 30);
+    Terminal *bruxelles = new AeroportRegional("Bruxelles", 50, 4, 30); */
 
 /*appler la methode FluxVilles qui ajoute le flux des passagers a chaque ville*/
 //FluxVilles(paris, rome, lyon, naples,bruxelles);
 
 /*Ajout des liaisons de chaque ville*/
-    paris->ajouterLiaison(rome);
+   /*  paris->ajouterLiaison(rome);
     paris->ajouterLiaison(lyon);
     paris->ajouterLiaison(bruxelles);
-    rome->ajouterLiaison(naples);
+    rome->ajouterLiaison(naples); */
 
 /*création d'un tablea de tous les terminaux du scenario*/
-    std::vector < SuperLigne * > lesLignes;
+   /*  std::vector < SuperLigne * > lesLignes;
     Terminal *terminaux[5] = {paris, rome, lyon, naples, bruxelles};
 
 
     Tests t;
-    Scenario *s = t.TestSenario1(345, "Avion");
+    Scenario *s = t.TestSenario1(345, "Avion"); */
 //t.AfficherVoyagesScenario(s);
 //t.TestPlusCourtChemin();
 // std::list <Voyage*> voyages;
@@ -105,5 +105,13 @@ int main() {
 //
 // }
 
+
+    if (Tests::TestGare()) {
+        std::cout << std::endl;
+        std::cout << "Le test TestGare() a reussie" << std::endl;
+        std::cout << std::endl;
+    }
+
+    
     return 0;
 }

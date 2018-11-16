@@ -1,9 +1,114 @@
 #include "Tests.h"
 
+/**
+ * TEST POUR LES DIFFERENTS TYPES DE MOYENS DE TRANSPORTS 
+**/
 
 Tests::Tests() : empreintecar(0) {
 
 }
+
+/*
+ * Une gare permet de faire circuler les trains
+ * Il ne doit donc pas permettre l'ajout d'une ligne d'avion sur la classe
+*/
+bool Tests::TestGare() {
+    std::cout << "* DEBUT TEST GARE *" << std::endl;
+    bool ok = true;
+
+    std::cout << std::endl;
+    std::cout << "** TEST CREATION AVEC AFFICHAGE **" << std::endl;
+    std::cout << std::endl;
+    
+    Terminal* bruxelles = new Gare("Bruxelles", 50.51, 4.20);
+
+    std::cout << std::endl;
+    std::cout << "** FIN TEST CREATION AVEC AFFICHAGE **" << std::endl;
+    std::cout << std::endl;
+
+    Terminal* rome = new Gare("Romes");
+    Terminal* naples = new AeroportRegional("Naples");
+
+    int resultat = bruxelles->ajouterLiaison(rome);
+    if(resultat == 1) {
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT NORMAL" << std::endl;
+        std::cout << "La gare " << bruxelles->getNom()  
+                  << " a ete liee a " << rome->getNom() << std::endl;
+        std::cout << std::endl;
+    }
+    else if(resultat == 0)
+    {
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT ANORMAL" << std::endl;
+        std::cout << "La gare " << bruxelles->getNom()  
+                  << " a deja ete liee a " << rome->getNom() << std::endl;
+        std::cout << std::endl;
+        return false;
+    }
+    else {
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT ANORMAL" << std::endl;
+        std::cout << "La gare " << bruxelles->getNom()  
+                  << " ne peut pas ete liee a " << rome->getNom() << std::endl;
+        std::cout << std::endl;
+        return false;
+    }
+
+    resultat = rome->ajouterLiaison(naples);
+
+
+    if(resultat == 1) {
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT ANORMAL" << std::endl;
+        std::cout << "La gare " << rome->getNom()  
+                  << "ne doit pas etre liee a " << naples->getNom() << std::endl;
+        std::cout << std::endl;
+        return false;
+    }
+    else if(resultat == 0)
+    {
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT ANORMAL" << std::endl;
+        std::cout << "La gare " << rome->getNom()  
+                  << " a deja ete liee a " << naples->getNom() << std::endl;
+        std::cout << std::endl;
+        return false;
+    }
+    else if(resultat == -1){
+        std::cout << std::endl;
+        std::cout << "COMPORTEMENT NORMAL" << std::endl;
+        std::cout << "La gare " << rome->getNom()  
+                  << " ne peut pas ete liee a " << naples->getNom() << std::endl;
+        std::cout << std::endl;
+        ok = true;
+    }
+    
+
+    std::cout << std::endl;
+    std::cout << "** TEST AFFICHAGE LIAISONS **" << std::endl;
+    std::cout << std::endl;
+    
+    bruxelles->afficher();
+
+    std::cout << std::endl;
+    std::cout << "** FIN TEST AFFICHAGE LIAISONS  **" << std::endl;
+    std::cout << std::endl;
+
+    delete bruxelles;
+    delete rome;
+    delete naples;
+
+
+    std::cout << std::endl;
+    std::cout << "* FIN TEST GARE *" << std::endl;
+    std::cout << std::endl;
+
+    return ok;
+} 
+
+
+
 
 double Tests::getEmpreinte() {
     return empreintecar;

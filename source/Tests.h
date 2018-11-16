@@ -28,6 +28,12 @@ public:
 
     void setEmpreinte(double empreintecar);
 
+    // TEST SUR LES TYPES DE TERMINAL
+
+    static bool TestGare();
+
+    // FIN TEST TYPE TERMINAL
+
     static void FluxVilles(Terminal *paris, Terminal *rome, Terminal *lyon, Terminal *naples, Terminal *bruxelles);
 
     void

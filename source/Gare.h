@@ -7,7 +7,7 @@
 class Gare : public Terminal {
 public:
     Gare(std::string _nom);
-
+    Gare(std::string _nom, double lat, double lng);
     Gare(std::string _nom, double lat, double lng, double temps);
 
     ~Gare();
