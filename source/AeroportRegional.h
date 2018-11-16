@@ -4,18 +4,23 @@
 #include <iostream>
 #include "Terminal.h"
 
-class AeroportRegional: public Terminal
-{
-  private:
-      const int MAX_LIAISON;
-  public:
+class AeroportRegional : public Terminal {
+private:
+    const int MAX_LIAISON;
+public:
     AeroportRegional(std::string _nom);
+
     AeroportRegional(std::string _nom, double lat, double lng, double temps);
+
     ~AeroportRegional();
 
-    int ajouterLiaison(Terminal* terminal);
+    int ajouterLiaison(Terminal *terminal);
+
     bool estUneGare();
+
     bool estUnHubMultimodal();
+
     void afficher();
 };
+
 #endif

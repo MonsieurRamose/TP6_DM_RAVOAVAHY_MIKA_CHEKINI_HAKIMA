@@ -5,18 +5,24 @@
 #include "Terminal.h"
 
 
-class HubAeroport: public Terminal
-{
-  private:
+class HubAeroport : public Terminal {
+private:
     const int MAX_LIAISON;
 
-  public:
+public:
     HubAeroport(std::string _nom);
+
     HubAeroport(std::string _nom, double lat, double lng, double temps);
+
     ~HubAeroport();
-    int ajouterLiaison(Terminal* terminal);
+
+    int ajouterLiaison(Terminal *terminal);
+
     bool estUneGare();
+
     bool estUnHubMultimodal();
+
     void afficher();
 };
+
 #endif

@@ -6,22 +6,31 @@
 #include "Gare.h"
 
 
-class HubMultimodal: public Terminal
-{
-  private:
+class HubMultimodal : public Terminal {
+private:
     const int MAX_LIAISON;
-    Terminal* gare;
+    Terminal *gare;
 
-  public:
+public:
     HubMultimodal(std::string _nom);
+
     HubMultimodal(std::string _nom, double lat, double lng, double temps);
-    HubMultimodal(std::string _nom, double lat, double lng, double temps, Terminal* g);
+
+    HubMultimodal(std::string _nom, double lat, double lng, double temps, Terminal *g);
+
     ~HubMultimodal();
-    const Terminal* getGare() const;
-    void setGare(Gare* g);
-    int ajouterLiaison(Terminal* terminal);
+
+    const Terminal *getGare() const;
+
+    void setGare(Gare *g);
+
+    int ajouterLiaison(Terminal *terminal);
+
     bool estUneGare();
+
     bool estUnHubMultimodal();
+
     void afficher();
 };
+
 #endif

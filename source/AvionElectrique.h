@@ -4,11 +4,15 @@
 #include <iostream>
 #include "Moyens.h"
 
-class AvionElectrique : public Moyens{
-	public:
-	AvionElectrique ();
-	~AvionElectrique ();
-	void afficher() const;
-	const std::string& getName() const;
+class AvionElectrique : public Moyens {
+public:
+    AvionElectrique();
+
+    ~AvionElectrique();
+
+    void afficher() const;
+
+    const std::string &getName() const;
 };
+
 #endif

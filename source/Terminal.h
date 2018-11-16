@@ -10,50 +10,71 @@
 #include <queue>
 #include <cmath>
 
-class Terminal
-{
-  static long DERNIER_NUMERO;
-  protected:
+class Terminal {
+    static long DERNIER_NUMERO;
+protected:
     double latitude;
     double longitude;
     double temps_correspondance;
-    std::vector<Terminal*> liaisons; // a revoir selon la classe ligne
+    std::vector<Terminal *> liaisons; // a revoir selon la classe ligne
     std::string nom;
-    std::map<Terminal*, int> flux;
+    std::map<Terminal *, int> flux;
     long numero;
-  public:
+public:
     Terminal();
+
     Terminal(std::string _nom);
+
     Terminal(std::string _nom, double lat, double lng, double temps);
+
     ~Terminal();
 
-  public:
+public:
     double getLatitude() const;
+
     double getLongitude() const;
+
     double getTempsCorrespondance() const;
-    std::string getNom() ;
+
+    std::string getNom();
+
     int getNbLiaisons();
-    std::vector<Terminal*> getLiasons() const;
-    std::map<Terminal*, int>getFlux() const;
+
+    std::vector<Terminal *> getLiasons() const;
+
+    std::map<Terminal *, int> getFlux() const;
+
     long getNumero() const;
+
     void setLatitude(double lat);
+
     void setLongitude(double lng);
+
     void setTempsCorrespondance(double temps);
 
     void setNom(std::string _nom);
-    void addFlux( Terminal* t, int n);
-    int getNbFluxPassagers( Terminal *t) ;
-    double degree_to_radian(double d) const;
-    double distance(double lat, double lng) const;
-    virtual void afficher() ;
 
-    virtual int ajouterLiaison(Terminal* terminal) = 0;
+    void addFlux(Terminal *t, int n);
+
+    int getNbFluxPassagers(Terminal *t);
+
+    double degree_to_radian(double d) const;
+
+    double distance(double lat, double lng) const;
+
+    virtual void afficher();
+
+    virtual int ajouterLiaison(Terminal *terminal) = 0;
+
     virtual bool estUneGare() = 0;
+
     virtual bool estUnHubMultimodal() = 0;
 
-    bool operator== (Terminal* t);
-    int& operator[](Terminal* t);
-    bool operator<( Terminal* t) const;
+    bool operator==(Terminal *t);
+
+    int &operator[](Terminal *t);
+
+    bool operator<(Terminal *t) const;
 
 };
 

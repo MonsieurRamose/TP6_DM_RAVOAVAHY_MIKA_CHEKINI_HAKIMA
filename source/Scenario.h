@@ -6,23 +6,26 @@
 #include "Voyage.h"
 
 
-class Scenario{
+class Scenario {
 private:
-  std::string nom;
-  std::list <Voyage*> voyages;
+    std::string nom;
+    std::list<Voyage *> voyages;
 
 public:
-  Scenario();
-  Scenario(std::string nom);
-  ~Scenario();
+    Scenario();
+
+    Scenario(std::string nom);
+
+    ~Scenario();
 
 
-  std::string getNom() const;
-  std::list <Voyage *> getVoyages() const;
-  void addVoyage(Voyage *);
-  void afficherVoyages () ;
+    std::string getNom() const;
 
+    std::list<Voyage *> getVoyages() const;
 
+    void addVoyage(Voyage *);
+
+    void afficherVoyages();
 
 
 };
