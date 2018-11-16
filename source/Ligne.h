@@ -19,7 +19,7 @@ public:
   }
 
   Ligne(Terminal* orig, Terminal* dest, int freq): SuperLigne( orig, dest,freq){
-    ;
+    
   }
 
   ~Ligne()

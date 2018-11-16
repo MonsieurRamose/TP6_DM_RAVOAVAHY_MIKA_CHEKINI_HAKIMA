@@ -49,7 +49,7 @@
 		frequence = freq;
 	}
 	void SuperLigne::afficher() const{
-		std::cout << " reliant "<< origine->getNom() <<" et " << destination->getNom() <<", frequence: " << frequence<< " passagers/jour"<<std::endl;
+		std::cout << " reliant "<< origine->getNom() <<" et " << destination->getNom() <<", frequence: " << frequence<<std::endl;
 	}
 
 

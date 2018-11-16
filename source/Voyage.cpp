@@ -140,7 +140,7 @@ std::list<SuperLigne*> Voyage::sortLignes(){
 
   if(org != this->destination)
   {
-    std::cout<< "Il n ya pas de ligne qui ramène à " << this->destination->getNom()<< std::endl;
+    std::cout<< "Il n ya pas de ligne qui  mène à " << this->destination->getNom()<< std::endl;
     return lignescopie; // renvoyer une liste vide
   }
   return lignesTrie;
@@ -152,9 +152,6 @@ std::list<SuperLigne*> Voyage::sortLignes(){
 double Voyage::tempsTrajet() {
   double dis = 0;
   double temps = 0;
-  Moyens *moyenTrans;
-  std::string moyenName ;
-  std::string m ;
   std::list<SuperLigne *>ligneTrie = sortLignes();
   /*s'il n existe pas de chemin qui mene a la destination finale*/
   if(ligneTrie.empty())
@@ -180,8 +177,8 @@ double Voyage::tempsTrajet() {
 
       /* On doit savoir le moyen de transport emprunté entre deux villes données car la vitesse
        varie d'un moyen de transport à un autre*/
-         m= typeid(*it).name();
-         moyenTrans = getMoyen( m);
+        std::string m= typeid(*it).name();
+        Moyens *moyenTrans = getMoyen( m);
 
       /*mettre a jour la frequence*/
       double freq = floor(nbFlux / moyenTrans->getCapacite());
@@ -255,7 +252,7 @@ bool Voyage::operator== (Voyage* v){
   return false;
 }
 
-/*
+
 int Voyage::position(Terminal *t, Terminal* terminaux[])
 {
   for (int i = 0; i < 5; i++) {
@@ -266,11 +263,11 @@ int Voyage::position(Terminal *t, Terminal* terminaux[])
   }
   return -1;
 }
-void Voyage::PlusCourtChemin(std::list<SuperLigne *> chemin, std::string moyen, Terminal* terminaux[], int n, std::list<SuperLigne *> leslignes)
+void Voyage::PlusCourtChemin(std::list< Terminal*> chemin, Terminal* terminaux[], int n, std::list<SuperLigne *> leslignes)
 {
 
     Terminal* start = this->getOrigine();
-
+    chemin.push_back(start);
     std::queue<std::pair<Terminal*, long> > file;
     file.push(std::make_pair(start, 1));
 
@@ -286,40 +283,41 @@ void Voyage::PlusCourtChemin(std::list<SuperLigne *> chemin, std::string moyen, 
 
     long maxDis = 10000000;
 
-    while (!file.empty())
-    {
+  //  while (!file.empty())
+  //  {
         Terminal* u = file.front().first;
         long dis = file.front().second;
         file.pop();
         visited.at(position(u, terminaux)) = true;
 
-          std::cout << "dejjjjjjjjjjjjon  "<< u->getNom() << " " << position(u, terminaux)<< std::endl;
+          std::cout << "dejjjjjjjjjjjjon  "<< u->getNom() << " " << u->getNbLiaisons()<< std::endl;
         for(std::vector<Terminal*>::iterator it = u->getLiasons().begin(); it != u->getLiasons().end(); it++)
         {
           std::cout << "destination " << (*it)->getNom() << std::endl;
-            Terminal* destination = (*it);
+          /*  Terminal* destination = (*it);
             if (!visited.at(position(destination, terminaux)))
             {
 
-                if ((*it)->getNom().compare(this->getDestination()->getNom()) == 0)
+                if (destination->getNom().compare(this->getDestination()->getNom()) == 0)
                     {
                       maxDis = std::min(maxDis, dis);
-                      SuperLigne* ligne = existeLigne(start, *it, moyen, leslignes);
-                      if(ligne != NULL)
-                      {
-                        chemin.push_back(ligne);
-                        start = (*it);
+                      //SuperLigne* ligne = existeLigne(start, *it, moyen, leslignes);
+                      //if(ligne != NULL)
+                      //{
+                        //chemin.push_back(ligne);
+                        chemin.push_back(*it);
+                        //laDest= (*it);
                       }
+                      file.push(std::make_pair(destination, dis + 1));
+                    //}
 
-                    }
-                file.push(std::make_pair(destination, dis + 1));
-            }
+            }*/
         }
 
-}
+//}
 }
 
- SuperLigne* Voyage::existeLigne(Terminal* start,Terminal* l, std::string moyen, std::list<SuperLigne *> leslignes) {
+ /*SuperLigne* Voyage::existeLigne(Terminal* start,Terminal* l, std::string moyen, std::list<SuperLigne *> leslignes) {
 
     for(std::list<SuperLigne *>::iterator it = leslignes.begin(); it != leslignes.end(); it++)
     {

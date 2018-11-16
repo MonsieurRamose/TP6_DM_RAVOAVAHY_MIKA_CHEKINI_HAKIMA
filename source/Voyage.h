@@ -34,7 +34,7 @@ public:
 	double tempsTrajet() ;
 	double empreinteCarbone();
 	Moyens* getMoyen(std::string& m) const;
-	void PlusCourtChemin(std::list<SuperLigne *> chemin, std::string moyen, Terminal* terminaux[], int n, std::list<SuperLigne *> leslignes);
+	void PlusCourtChemin(std::list<Terminal *> chemin, Terminal* terminaux[], int n, std::list<SuperLigne *> leslignes);
 	SuperLigne* existeLigne( Terminal *start,Terminal * l, std::string moyen,std::list<SuperLigne *> leslignes);
 	bool operator== (Voyage* v);
 	int position(Terminal *t, Terminal*[] );

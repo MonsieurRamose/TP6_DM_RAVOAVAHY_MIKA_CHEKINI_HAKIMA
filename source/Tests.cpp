@@ -146,7 +146,7 @@ Scenario* Tests::TestSenario1(double maxTemps, std::string moyenTrans){
 
   Scenario* scenario1;
   std::list <Voyage*> voyages;
-  TousVoyagesPossibles(voyages,scenario1, terminaux, 5,"scenario1");
+  //TousVoyagesPossibles(voyages,scenario1, terminaux, 5,"scenario1");
 
 
   //std::list <Voyage*>::iterator it= voyages.begin();
@@ -160,7 +160,7 @@ Scenario* Tests::TestSenario1(double maxTemps, std::string moyenTrans){
      //scenario1->addVoyage(*it);
     //scenario1->getVoyages().push_back(*it);
     RemplirLignes((*it), (*it)->getOrigine(),(*it)->getDestination(), lesLignes);
-    std::cout << "voyage" << ((*it)->getOrigine())->getNom() << " to " <<((*it)->getDestination())->getNom()<< (*it)->getLignes().size()<<std::endl;
+  //  std::cout << "voyage" << ((*it)->getOrigine())->getNom() << " to " <<((*it)->getDestination())->getNom()<< (*it)->getLignes().size()<<std::endl;
 
   }
 

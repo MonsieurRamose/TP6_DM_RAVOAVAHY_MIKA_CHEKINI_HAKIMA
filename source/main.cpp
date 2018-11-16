@@ -85,7 +85,7 @@ paris->ajouterLiaison(bruxelles);
 rome->ajouterLiaison(naples);
 
 /*création d'un tablea de tous les terminaux du scenario*/
-  std::vector<SuperLigne*> lesLignes;
+  std::list<SuperLigne*> lesLignes;
  Terminal* terminaux [5] = { paris, rome, lyon, naples, bruxelles};
 
 
@@ -93,9 +93,12 @@ rome->ajouterLiaison(naples);
 
 
 Tests t;
-Scenario* s = t.TestSenario1(345, "Avion");
+//Scenario* s = t.TestSenario1(345, "Avion");
 //t.AfficherVoyagesScenario(s);
-//t.TestPlusCourtChemin();
+Voyage *v = new Voyage(paris, naples);
+  std::list<Terminal*> chemin;
+v->PlusCourtChemin(chemin, terminaux, 5, lesLignes);
+std::cout << " je sais que c est fauxxxxxxxxxxxxxx" << chemin.size()<< std::endl;
 // std::list <Voyage*> voyages;
 // //t.TousVoyagesPossibles( voyages,s, terminaux, 5, "scenario1");
 

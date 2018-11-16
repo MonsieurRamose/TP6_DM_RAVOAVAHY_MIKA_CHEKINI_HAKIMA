@@ -18,7 +18,6 @@ protected:
 	const int getCapacite() const;
 	const int getVitesse() const;
 	const double getEmpreinte() const;
-	//void setEmpreinte(double emp);
 	virtual void afficher() const;
 	virtual const std::string& getName()const = 0;
 	~Moyens();
