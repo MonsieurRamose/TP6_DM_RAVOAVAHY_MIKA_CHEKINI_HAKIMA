@@ -34,16 +34,20 @@
 	{
 		std::cout << "destructeur SuperLigne" << std::endl;
 	}
-	 Terminal* SuperLigne::getOrigine() {
-	return origine;
+
+  Terminal* SuperLigne::getOrigine()
+	{
+ 		return origine;
 	}
 
-	 Terminal* SuperLigne::getDestination() {
-	return destination;
+	Terminal* SuperLigne::getDestination()
+	{
+		return destination;
 	}
 
-	const int SuperLigne::getFrequence() const{
-	return frequence;
+	const int SuperLigne::getFrequence() const
+	{
+		return frequence;
 	}
 	void SuperLigne::setFrequence(int freq){
 		frequence = freq;

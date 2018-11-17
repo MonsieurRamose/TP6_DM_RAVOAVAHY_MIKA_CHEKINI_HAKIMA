@@ -90,15 +90,15 @@ rome->ajouterLiaison(naples);
 
 
 
-
-
 Tests t;
-//Scenario* s = t.TestSenario1(345, "Avion");
+//double tem = t.TestSenario1(480, "Avion");
+//td::cout <<tem << std::endl;
 //t.AfficherVoyagesScenario(s);
-Voyage *v = new Voyage(paris, naples);
-  std::list<Terminal*> chemin;
-v->PlusCourtChemin(chemin, terminaux, 5, lesLignes);
-std::cout << " je sais que c est fauxxxxxxxxxxxxxx" << chemin.size()<< std::endl;
+//Voyage *v = new Voyage(paris, naples);
+//  std::list<Terminal*> chemin;
+  t.EtudeDeCas();
+//v->PlusCourtChemin(chemin, terminaux, 5, lesLignes);
+//std::cout << " je sais que c est fauxxxxxxxxxxxxxx" << chemin.size()<< std::endl;
 // std::list <Voyage*> voyages;
 // //t.TousVoyagesPossibles( voyages,s, terminaux, 5, "scenario1");
 

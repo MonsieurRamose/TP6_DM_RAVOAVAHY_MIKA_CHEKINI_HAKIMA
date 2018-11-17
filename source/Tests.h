@@ -18,23 +18,26 @@
 
 
 class Tests {
-private:
-  double empreintecar ;
+
 public:
   Tests();
    double getEmpreinte();
    void setEmpreinte(double empreintecar);
   static void FluxVilles(Terminal * paris, Terminal *rome, Terminal *lyon, Terminal *naples, Terminal *bruxelles );
-  void TousVoyagesPossibles(std::list <Voyage*> &voyages,Scenario* s, Terminal* terminaux[],int n, std::string sceario);
+  void TousVoyagesPossibles(std::list <Voyage*> &voyages,Scenario* s, Terminal* terminaux[],int n);
   void ToutesLignesExistantes( std::vector<SuperLigne*>lignes, Terminal* terminaux[], int n) ;
   void RemplirLignes(Voyage* v , Terminal* org,Terminal* dest, std::vector<SuperLigne*> lignesEx);
-  void  AfficherVoyagesScenario(Scenario *s);
-  Scenario* TestSenario1(double maxTemps, std::string moy);
-  static double TestSenario2();
-  static double TestSenario3();
-  static double TestSenario4();
-  static double TestSenario5();
-  static double TestSenario6();
+  double TestSenario1(double maxTemps, std::string scenario);
+  double TestSenario2(double maxTemps, std::string scenario);
+  double TestSenario3(double maxTemps, std::string scenario);
+  double TestSenario4(double maxTemps, std::string scenario);
+  double TestSenario5(double maxTemps, std::string scenario);
+  double TestSenario6(double maxTemps, std::string scenario);
+  double calculerEmpreinteVoyages(double maxTemps, Scenario* scenario1, std::list <Voyage*> voyages);
+  double ChoisirScenario(int Maxtemps, int n, int& scenario);
+   double minEmpreinteScenario(double empScenario[], int n, int& scenario);
+  void scenarioGagant(int indice);
+  void EtudeDeCas();
   void TestPl();
 
 };

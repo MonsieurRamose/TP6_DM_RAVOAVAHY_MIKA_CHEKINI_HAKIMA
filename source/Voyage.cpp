@@ -73,6 +73,8 @@ void Voyage::afficherLignes(){
   }
 }
 
+/*Cette méthode permet de récupérer le type
+ dynamique d’un voyage.(avion, avion électrique, train)*/
  Moyens* Voyage::getMoyen(std::string& m) const{
   if(m.compare("5Train")== 0)
   {
@@ -87,6 +89,16 @@ void Voyage::afficherLignes(){
 }
 }
 
+void Voyage::popBack()
+{
+  if (!lignes.empty())
+  lignes.pop_back();
+}
+
+
+/*Cette méthode renvoie une liste triée des lignes d’un voyage, qui est utile au moment
+du calcule du temps de trajet ainsi que l’empreinte carbone consommé.
+*/
 std::list<SuperLigne*> Voyage::sortLignes(){
 
   std::list<SuperLigne*> lignescopie;
@@ -140,14 +152,14 @@ std::list<SuperLigne*> Voyage::sortLignes(){
 
   if(org != this->destination)
   {
-    std::cout<< "Il n ya pas de ligne qui  mène à " << this->destination->getNom()<< std::endl;
+    /*il n ya pas de lignes qui mene a la destinatin*/
     return lignescopie; // renvoyer une liste vide
   }
   return lignesTrie;
 
 }
 
-
+/*Cette méthode permet de calculer le temps de trajet à partir d’un flux de passagers.*/
 
 double Voyage::tempsTrajet() {
   double dis = 0;
@@ -194,6 +206,7 @@ double Voyage::tempsTrajet() {
   return temps;
 }
 
+/*Cette méthode permet de calculer l’empreinte carbone associé à un flux de passagers.*/
 double Voyage::empreinteCarbone() {
 
   double empreinteCar = 0;
@@ -233,7 +246,7 @@ double Voyage::empreinteCarbone() {
 
 return empreinteCar;
 }
-
+/*Redéfinition de l’opérateur == qui renvoie true si deux voyages sont égaux, false sinon.*/
 
 bool Voyage::operator== (Voyage* v){
 
@@ -251,95 +264,3 @@ bool Voyage::operator== (Voyage* v){
   }
   return false;
 }
-
-
-int Voyage::position(Terminal *t, Terminal* terminaux[])
-{
-  for (int i = 0; i < 5; i++) {
-    if(t == terminaux[i])
-    {
-      return i;
-    }
-  }
-  return -1;
-}
-void Voyage::PlusCourtChemin(std::list< Terminal*> chemin, Terminal* terminaux[], int n, std::list<SuperLigne *> leslignes)
-{
-
-    Terminal* start = this->getOrigine();
-    chemin.push_back(start);
-    std::queue<std::pair<Terminal*, long> > file;
-    file.push(std::make_pair(start, 1));
-
-    //double n = this->getLignes().size()-1;
-
-    std::vector<bool> visited(n) ;
-    for (int i=0; i < n; i++)
-      {
-        visited.at(i)= false;
-      }
-
-      //std::cout<<" visited size "<< this->getLignes().size()<<std::endl;
-
-    long maxDis = 10000000;
-
-  //  while (!file.empty())
-  //  {
-        Terminal* u = file.front().first;
-        long dis = file.front().second;
-        file.pop();
-        visited.at(position(u, terminaux)) = true;
-
-          std::cout << "dejjjjjjjjjjjjon  "<< u->getNom() << " " << u->getNbLiaisons()<< std::endl;
-        for(std::vector<Terminal*>::iterator it = u->getLiasons().begin(); it != u->getLiasons().end(); it++)
-        {
-          std::cout << "destination " << (*it)->getNom() << std::endl;
-          /*  Terminal* destination = (*it);
-            if (!visited.at(position(destination, terminaux)))
-            {
-
-                if (destination->getNom().compare(this->getDestination()->getNom()) == 0)
-                    {
-                      maxDis = std::min(maxDis, dis);
-                      //SuperLigne* ligne = existeLigne(start, *it, moyen, leslignes);
-                      //if(ligne != NULL)
-                      //{
-                        //chemin.push_back(ligne);
-                        chemin.push_back(*it);
-                        //laDest= (*it);
-                      }
-                      file.push(std::make_pair(destination, dis + 1));
-                    //}
-
-            }*/
-        }
-
-//}
-}
-
- /*SuperLigne* Voyage::existeLigne(Terminal* start,Terminal* l, std::string moyen, std::list<SuperLigne *> leslignes) {
-
-    for(std::list<SuperLigne *>::iterator it = leslignes.begin(); it != leslignes.end(); it++)
-    {
-     if( (*it)->getOrigine()->getNom().compare(start->getNom()) == 0 && (*it)->getDestination()->getNom().compare(l->getNom()) == 0)
-     {
-       return (*it);
-     }
-      /*{
-        if(moyen.compare("Avion") == 0)
-        {
-          return new Ligne<Avion> (this->origine,l,0 );
-        }else
-          if(moyen.compare("AvionElectrique") == 0)
-          {
-            return new Ligne<AvionElectrique> (this->origine,l,0 );
-          }else{
-            return new Ligne<Train> (this->origine,l,0 );
-          }
-      }*/
-
-/*
-    }
-    return NULL;
-}
-*/

@@ -29,13 +29,12 @@ public:
 	void setDestination(Terminal* d);
 	void setLignes(SuperLigne * s);
  	bool popLignes(SuperLigne * s);
+	void popBack();
 	void afficherLignes();
 	std::list<SuperLigne*> sortLignes();
 	double tempsTrajet() ;
 	double empreinteCarbone();
 	Moyens* getMoyen(std::string& m) const;
-	void PlusCourtChemin(std::list<Terminal *> chemin, Terminal* terminaux[], int n, std::list<SuperLigne *> leslignes);
-	SuperLigne* existeLigne( Terminal *start,Terminal * l, std::string moyen,std::list<SuperLigne *> leslignes);
 	bool operator== (Voyage* v);
 	int position(Terminal *t, Terminal*[] );
 
